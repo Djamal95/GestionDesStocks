@@ -131,9 +131,15 @@ trait buildQueryChaines
             $query .= " {$this->limit}";
         }
 
+        /** 
+         * Add OFFSET if exist
+         */
+        if ($this->offset) {
+            $query .= " {$this->offset}";
+        }
+        
         return $this->selectBuildRequest($query);
     }
-
 
     /**
      * insert query chaine
@@ -165,13 +171,14 @@ trait buildQueryChaines
         return $this->executeBuildRequest($Iquery);
     }
 
-
     /**
      * Update query chaine
      *  @return mixed
      */
     public function UQuery(): string
     {
+
+        $query = "";
 
         /** 
          * Update inital query chaine
@@ -190,14 +197,14 @@ trait buildQueryChaines
          * Add SET if exist
          */
         if ($this->set) {
-            $query .= " SET {$this->set}";
+            $query .= " SET {$this->set} ";
         }
 
         /** 
          * Add SET if exist
          */
         if ($this->set_i) {
-            $query .= " SET {$this->set_i}";
+            $query .= " SET {$this->set_i} ";
         }
 
         /** 
@@ -243,7 +250,7 @@ trait buildQueryChaines
         }
 
         /* 
-            Add AND if exist
+        *Add AND if exist
         */
         if ($this->and) {
             $query .= " {$this->and}";
@@ -276,6 +283,13 @@ trait buildQueryChaines
         if ($this->limit_i) {
             $query .= " {$this->limit_i}";
         }
+
+        /** 
+         * Add OFFSET if exist
+         */
+        if ($this->offset) {
+            $query .= " {$this->offset}";
+        }        
 
         return $this->executeBuildRequest($query);
     }
@@ -354,6 +368,13 @@ trait buildQueryChaines
         if ($this->limit_i) {
             $query .= " {$this->limit_i}";
         }
+
+        /** 
+         * Add OFFSET if exist
+         */
+        if ($this->offset) {
+            $query .= " {$this->offset}";
+        }        
 
         return $this->executeBuildRequest($query);
     }

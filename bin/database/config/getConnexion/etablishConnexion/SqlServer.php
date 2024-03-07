@@ -15,17 +15,18 @@ trait SqlServer{
 
         // Try to connect to database to etablish connexion
         try {
+            
             return new PDO(
-                "sqlsrv:Server=" . static::DB_HOST($db) . "," . static::DB_PORT($db) . "Database=" . static::DB_DATABASE($db),
-                static::DB_USER($db),
-                static::DB_PASSWORD($db),
+                static::SQL_SERVER_DNS($db) . "Database=" . static::DB_DATABASE($db) , 
+                static::DB_USER($db), 
+                static::DB_PASSWORD($db) , 
                 static::sqlServerOption()
             );
 
             // If impossible send error message        
         } catch (PDOException $e) {
 
-            $this->getError($e->getMessage());
+            throw new PDOException(static::getError($e->getMessage()));
         }
     }
 
@@ -35,14 +36,14 @@ trait SqlServer{
         // Try to connect to database to etablish connexion
         try {
 
-           $etablishConnexion = new PDO(
-                "sqlsrv:Server=" . static::DB_HOST($db) . ';' . static::DB_PORT($db),
-                static::DB_USER($db),
-                static::DB_PASSWORD($db),
+            $etablishConnexion = new PDO(
+                static::SQL_SERVER_DNS($db) , 
+                static::DB_USER($db), 
+                static::DB_PASSWORD($db) , 
                 static::sqlServerOption()
             );
 
-           $etablishConnexion->exec( "CREATE DATABASE {$dbName}" );
+            $etablishConnexion->exec( "CREATE DATABASE {$dbName}" );
 
             return true;
             
@@ -62,5 +63,4 @@ trait SqlServer{
 
         return $this->setSqlServerConnexionWithoutDatabase($dbName , $db);
     }      
-
 }

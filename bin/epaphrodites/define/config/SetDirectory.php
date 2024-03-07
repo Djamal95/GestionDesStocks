@@ -17,7 +17,7 @@ define('_KEYGEN_', 'CRSF');
 define('_DIR_MAIN_', 'bin');
 
 // Set database accpeted 'mysql/postgre/sqlserver/sqlite/mongo/redis'
-define('_FIRST_DRIVER_', 'mysql');
+define('_FIRST_DRIVER_', 'sqlite');
 
 // vendor directory
 define('_DIR_VENDOR_', 'vendor');
@@ -72,6 +72,9 @@ define('_DIR_JSON_DATAS_', 'bin/database/datas/json');
 
 // Main toml datas directory
 define('_DIR_TOML_DATAS_', 'bin/database/datas/toml/');
+
+// Main sqLite datas directory
+define('_DIR_SQLITE_DATAS_', 'bin/database/datas/SqlLite/');
 
 // Main config ini directory
 define('_DIR_CONFIG_INI_', 'bin/database/config/ini/');

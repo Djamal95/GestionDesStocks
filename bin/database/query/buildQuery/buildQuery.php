@@ -61,26 +61,26 @@ trait buildQuery
     {
         $param = $this->param ?? null;
         $setParam = !is_null($this->param);
-        $close = !is_null($this->close);
-        $db = $this->db&&$db===1 ? $this->db : $db;
+        $close = isset($this->close) && $this->close === true ? true : false;
+        $db = isset($this->db)&&$db===1 ? $this->db : $db;
     
         // Execute the SELECT query and return the result
         return static::initConfig()['process']->select($query, $param, $setParam, $close, $db);
     }
 
     /**
-     * Execute INSERT query
+     * Execute INSERT/UPDATE/DELETE query
      *
      * @param string $query The query to execute
      * @return mixed The query execution result
      */
     public function executeBuildRequest(string $query , int $db = 1)
     {
-       
+   
         $param = $this->param ?? null;
         $setParam = !is_null($this->param);
-        $close = !is_null($this->close);
-        $db = $this->db&&$db===1 ? $this->db : $db;
+        $close = isset($this->close) && $this->close === true ? true : false;
+        $db = isset($this->db)&&$db===1 ? $this->db : $db;
 
         // Execute the INSERT query and return the result
         return static::initConfig()['process']->runRequest($query, $param, $setParam, $close, $db);
