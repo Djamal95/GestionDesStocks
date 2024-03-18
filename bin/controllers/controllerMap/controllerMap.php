@@ -1,5 +1,4 @@
-
-use Epaphrodites\controllers\controllers\product;<?php
+<?php
 
 namespace Epaphrodites\controllers\controllerMap;
 
