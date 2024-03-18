@@ -1,4 +1,5 @@
-<?php
+
+use Epaphrodites\controllers\controllers\product;<?php
 
 namespace Epaphrodites\controllers\controllerMap;
 
@@ -31,6 +32,7 @@ trait controllerMap
     private function controllerMap(): array
     {
         return [
+			'product' => [ new product, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
 			'product' => [ new product, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
             "api" => [ new api, 'SwitchApiControllers', false ],
             "chats" => [ new chats, 'SwitchControllers', true, _DIR_ADMIN_TEMP_ ],
