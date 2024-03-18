@@ -32,7 +32,6 @@ trait controllerMap
     {
         return [
 			'product' => [ new product, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
-			'product' => [ new product, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
             "api" => [ new api, 'SwitchApiControllers', false ],
             "chats" => [ new chats, 'SwitchControllers', true, _DIR_ADMIN_TEMP_ ],
             "users" => [ new users, 'SwitchControllers', true, _DIR_ADMIN_TEMP_ ],

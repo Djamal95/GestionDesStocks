@@ -26,24 +26,16 @@ final class product extends MainSwitchers
     }       
         
     /**
-     * Start exemple page
-     * @param string $html
-     * @return void
-    */      
-    public final function exemplePages(string $html): void
-    {
-        $this->views( $html, [], false );
-    }     
-        
-
-    /**
     * start view function
-    * 
     * @param string $html
     * @return void
     */
      public final function addProduct(string $html): void{
     
-        $this->views( $html, [], false );
+        if(static::isValidMethod(true) && static::arrayNoEmpty(['__label__'])){
+            var_dump(static::getPost('__label__'));die;
+        }
+
+        $this->views( $html, [], true );
     }
 }
