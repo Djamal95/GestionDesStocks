@@ -98,4 +98,7 @@ class insert extends InsertInsert
             return false;
         }
     }   
+    public function addProduct(string $label){
+        var_dump($label);die;
+    }
 }
