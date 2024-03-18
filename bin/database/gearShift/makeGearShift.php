@@ -16,7 +16,13 @@ final class makeGearShift extends buildGearShift{
     */
     public final function up():array{
         return [
-            $this->createUsersAccountTable()
+			$this->createEntrepriseTable(),
+			$this->createProductTable(),
+			$this->createFournisseurTable(),
+			$this->createCommandfournisseurTable(),
+			$this->createCommandeTable(),
+			$this->createClientTable(),
+			$this->createCategoryTable(),
         ];
     }
 
