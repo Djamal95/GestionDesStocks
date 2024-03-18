@@ -9,12 +9,12 @@ final class auth extends SelectAuth
 
   /**
    * Check users
-   * @param string|null $login
-   * @return array|bool|null
-   */
+   * @param string $login
+   * @return array|bool
+  */
   public function checkUsers(
     string $login
-  ):array|bool|null{
+  ):array|bool{
 
     return match (_FIRST_DRIVER_) {
 

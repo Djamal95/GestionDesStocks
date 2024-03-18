@@ -6,7 +6,7 @@ trait makeDownGearShift{
 
     /**
      * Drop Column
-     * create 25/01/2024
+     * create 25/01/2024 23:07:14
      */
     public function dropUsersAccountColumn()
     {
@@ -14,5 +14,5 @@ trait makeDownGearShift{
             $table->dropColumn('username');
             $table->db(2);
         });
-    }                   
+    }                     
 }

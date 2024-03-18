@@ -31,8 +31,9 @@ class auth extends SelectAuth
    * @param string $login
    * @return array|bool
    */
-  public function findSqlUsers(string $login):array|bool
-  {
+  public function findSqlUsers(
+    string $login
+  ):array|bool{
 
     if ($this->if_table_exist() === true) {
 
