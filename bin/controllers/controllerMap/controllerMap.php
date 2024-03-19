@@ -9,6 +9,7 @@ use Epaphrodites\controllers\controllers\chats;
 use Epaphrodites\controllers\controllers\setting;
 use Epaphrodites\controllers\controllers\dashboard;
 use Epaphrodites\controllers\controllers\product;
+use Epaphrodites\controllers\controllers\test;
 
 trait controllerMap
 {
