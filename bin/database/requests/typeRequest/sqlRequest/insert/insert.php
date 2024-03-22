@@ -16,11 +16,10 @@ class insert extends InsertInsert
      * @return bool
      */
     public function sqlConsoleAddUsers(
-        ?string $login = null, 
-        ?string $password = null, 
+        ?string $login = null,
+        ?string $password = null,
         ?int $UserGroup = null
-    ):bool
-    {
+    ): bool {
 
         $UserGroup = $UserGroup !== NULL ? $UserGroup : 1;
 
@@ -48,12 +47,11 @@ class insert extends InsertInsert
      * @return bool
      */
     public function addUserChats(
-        ?string $emitter = null, 
-        ?string $recipient = null, 
-        ?int $type = null, 
+        ?string $emitter = null,
+        ?string $recipient = null,
+        ?int $type = null,
         ?string $content = null
-    ):bool
-    {
+    ): bool {
 
         if (!empty($content) && !empty($recipient)) {
 
@@ -77,10 +75,9 @@ class insert extends InsertInsert
      * @return bool
      */
     public function sqlAddUsers(
-        ?string $login = null, 
+        ?string $login = null,
         ?int $usersgroup = null
-    ):bool
-    {
+    ): bool {
 
         if (!empty($login) && !empty($usersgroup) && count(static::initQuery()['getid']->sqlGetUsersDatas($login)) < 1) {
 
@@ -97,8 +94,14 @@ class insert extends InsertInsert
         } else {
             return false;
         }
-    }   
-    public function addProduct(string $label){
-        var_dump($label);die;
+    }
+    public function addProduct(string $label)
+    {
+        $this->table("product")
+            ->insert("libelleProduct, descriptionProduct, quantityProduct, priceProduct, idCategoryProduct, imageProduct")
+            ->values('?,?,?,?,?,?')
+            ->sdb(3)
+            ->param([$label,"bonne nourriture",5,500,5,"C"])
+            ->IQuery();
     }
 }
