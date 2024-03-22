@@ -57,4 +57,15 @@ final class product extends MainSwitchers
     
         $this->views( $html, [], true );
     }
+
+    /**
+    * start view function
+    * 
+    * @param string $html
+    * @return void
+    */
+     public final function listOfAllProduct(string $html): void{
+    
+        $this->views( $html, [], true );
+    }
 }

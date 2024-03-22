@@ -1,0 +1,67 @@
+{% extends layouts %} {% from breadcrumb import breadcrumb_field %}{% from message import alert_msg %}{% from forms
+import input_field, select_field, import_field, loader , submit %} {% block content %}
+{{ alert_msg( reponse , alert ) }}{{ breadcrumb_field( 'EDIT PRODUCT' )}}
+<div class='container-fluid'>
+    <form class="laodForm" method="post" novalidate>
+        <div class="row g-3">
+            {{ input_field(
+            {
+            maxlength : 50 ,
+            require : true ,
+            character : "string",
+            name : '__name__' ,
+            label : 'Product name' ,
+            feedback : 'Please enter the name of product.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 300 ,
+            require : true ,
+            character : "string",
+            name : '__description__' ,
+            label : 'Description' ,
+            feedback : 'Please enter the description.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 9 ,
+            require : true ,
+            character : "numeric",
+            name : '__quantity__' ,
+            label : 'Quantity' ,
+            feedback : 'Please enter quantity.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 9 ,
+            require : true ,
+            character : "numeric",
+            name : '__price__' ,
+            label : 'Price' ,
+            feedback : 'Please enter price.' ,
+            }
+            )}}
+            {{ select_field({
+            label:"Category Product",
+            name : "__Category__",
+            datas : data.userGroup(),
+            require : true })
+            }}
+            {{ import_field({
+                name : 'image', 
+                id : 'image' , 
+                accept : '.jpg,.jpeg,.png,.svg, .webp',
+                require : true,
+                feedback : "This field is required!!!" }) 
+            }}
+            {{ submit({
+            label : 'Save your informations',
+            icon : 'bi bi-pen'
+            }) }}
+        </div>
+    </form>
+</div>
+{% endblock %}
