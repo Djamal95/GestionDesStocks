@@ -105,5 +105,18 @@ class select extends SelectSelect
             ->SQuery();
 
         return $result;
-    }     
+    }    
+    
+      /**
+    * Request to select
+    * @param string $value
+    * @return bool
+   */
+   public function listOfAllCategory(){
+        
+    $result = $this->table('category')
+                ->SQuery();
+
+    return $result;
+}
 }

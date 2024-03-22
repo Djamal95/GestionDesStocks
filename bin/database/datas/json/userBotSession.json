@@ -1,0 +1,34 @@
+{
+    "0": {
+        "date": "22-24-2024 01:06:34",
+        "login": "admin",
+        "question": "comment créer une requete de type sql",
+        "answers": "Je suis une IA d'assistance professionnelle. Je ne gère pas ce type d'informations.",
+        "language": "fr",
+        "previous": false
+    },
+    "1": {
+        "date": "22-24-2024 01:06:55",
+        "login": "admin",
+        "question": "mettre en place une requete select dans epaphrodite",
+        "answers": "Votre préoccupation n'est pas claire pour moi. Pourriez-vous fournir plus de détails, s'il vous plaît ?",
+        "language": "fr",
+        "previous": true
+    },
+    "2": {
+        "date": "22-24-2024 01:07:37",
+        "login": "admin",
+        "question": "commande pour créer une methode select",
+        "answers": "Pour garantir la précision, pourriez-vous fournir plus de détails, s'il vous plaît ?",
+        "language": "fr",
+        "previous": true
+    },
+    "3": {
+        "date": "22-24-2024 01:08:04",
+        "login": "admin",
+        "question": "commande pour créer un requete de type select",
+        "answers": "Je ne comprends pas votre préoccupation. Pourriez-vous être plus explicite, s'il vous plaît ?",
+        "language": "fr",
+        "previous": true
+    }
+}

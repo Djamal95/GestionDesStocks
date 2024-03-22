@@ -34,10 +34,27 @@ final class product extends MainSwitchers
     */
      public final function addProduct(string $html): void{
     
-        if(static::isValidMethod(true) && static::arrayNoEmpty(['__label__'])){
-            $this->insert->addProduct(static::getPost('__label__'));
+        if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__quantity__','__price__','__Category__'])){
+            $this->insert->addProduct(
+                static::getPost('__name__'),
+                static::getPost('__description__'),
+                static::getPost('__quantity__'),
+                static::getPost('__price__'),
+                static::getPost('__Category__'),
+            );
         }
-
         $this->views( $html, [ ], true );
+    }
+
+
+    /**
+    * start view function
+    * 
+    * @param string $html
+    * @return void
+    */
+     public final function updateProduct(string $html): void{
+    
+        $this->views( $html, [], true );
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Epaphrodites\database\datas\arrays;
+use Epaphrodites\controllers\controllers\product;
 
 class datas
 {
@@ -23,6 +24,18 @@ class datas
         return $key === null ? $list : ($list[$key] ?? 0);
     }
     
+    public function categoryProd(
+        ?int $key = null
+    ): mixed
+    {
+        $list = [
+            1 => 'SUPER ADMINISTRATOR',
+            2 => 'ADMINISTRATOR',
+            3 => 'USERS',
+        ];
+    
+        return $key === null ? $list : ($list[$key] ?? 0);
+    }
 
     /**
      * Authorization actions
