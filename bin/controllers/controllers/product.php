@@ -82,7 +82,8 @@ final class product extends MainSwitchers
     */
      public final function listOfAllProduct(string $html): void{
         $this->views( $html, [
-            'select' =>$this->select->listOfAllProduct()
+            'select' =>$this->select->listOfAllProduct(),
+            'data' => $this->select->listOfAllCategory()
         ], true );
     }
 }
