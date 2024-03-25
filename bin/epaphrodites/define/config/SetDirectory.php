@@ -35,7 +35,7 @@ define('_CRSF_TOKEN_', 'crsf_token');
 define('_DIR_VIEWS_', 'bin/views');
 
 // Media files
-define('_DIR_MEDIA_', 'static/docs/');
+define('_DIR_MEDIA_', 'static/img/');
 
 // Main directory
 define('_ROOT_', dirname(__DIR__));

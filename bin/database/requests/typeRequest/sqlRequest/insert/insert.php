@@ -95,13 +95,14 @@ class insert extends InsertInsert
             return false;
         }
     }
-    public function addProduct(string $name, string $description, string $quantity, string $price, string $category)
+    public function addProduct(string $name, string $description, string $quantity, string $price, string $category, string $source)
     {
         $this->table("product")
             ->insert("libelleProduct, descriptionProduct, quantityProduct, priceProduct, idCategoryProduct, imageProduct")
             ->values('?,?,?,?,?,?')
             ->sdb(3)
-            ->param([$name,$description,$quantity,$price,$category,"C"])
+            ->param([$name,$description,$quantity,$price,$category,$source])
             ->IQuery();
+        return true; 
     }
 }

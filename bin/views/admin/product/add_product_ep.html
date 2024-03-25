@@ -1,7 +1,8 @@
 {% extends layouts %}{% from breadcrumb import breadcrumb_field %} {% from breadcrumb import breadcrumb_field %} {% from message import alert_msg %}{% from forms
 import input_field, import_field, select_field , loader ,submit %}{% block content %}{{ breadcrumb_field( 'ADD PRODUCT' )}} {{ alert_msg( reponse , alert ) }}
 <div class='container-fluid'>
-    <form class="laodForm" method="post" novalidate>
+    {{ alert_msg(answers, alert)}}
+    <form class="laodForm" method="post" novalidate enctype="multipart/form-data">
         <div class="row g-3">
             {{ loader() }}{{ __csrf() }}
             {{ input_field(
@@ -47,13 +48,15 @@ import input_field, import_field, select_field , loader ,submit %}{% block conte
             {{ select_field({
                 label:"Category Product",
                 name : "__Category__",
-                datas : data.userGroup(),
+                datas : select,
+                value : 'idCategory',
+                selected : 'nameCategory',
                 require : true })
             }}
             {{ import_field({
                 name : 'image', 
                 id : 'image' , 
-                accept : '.jpg,.jpeg,.png,.svg, .webp',
+                accept : '.jpg,.jpeg,.png,.svg,.webp',
                 require : true,
                 feedback : "This field is required!!!" }) 
             }}

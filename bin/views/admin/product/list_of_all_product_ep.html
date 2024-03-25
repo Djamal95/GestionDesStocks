@@ -17,8 +17,8 @@ import filter_search , loader, checkbox_field, actions_field, select_field %}{% 
                             {{ select_field(
                             {
                             name:'filtre',
-                            init: "Users group",
-                            datas : data.userGroup,
+                            init: "Category group",
+                            datas : select.nameCategory,
                             onchange : "filterForm();",
                             class : "dropdown",
                             position : position
@@ -38,35 +38,31 @@ import filter_search , loader, checkbox_field, actions_field, select_field %}{% 
                     <th>{{ checkbox_field({ id : 'checkall' }) }}</th>
                     <th>Nº</th>
                     <th>PRODUCT NAME</th>
+                    <th>DESCRIPTION</th>
                     <th>QUANTITY</th>
                     <th>PRICE</th>
                     <th>CATEGORY</th>
                 </tr>
             </thead>
             <tbody scope="row" id="searchtd">
-                {% for selected in liste_users %} {% set counter = (counter | default (0))+1 %}
+                {% for select in select %} 
                 <tr data-order-column="1">
                     <td class='tblcenter' style="width: 1%;">{{ checkbox_field( { name : 'users[]' , class : 'checkitem'
-                        , value : selected.loginusers|e } ) }}</td>
+                        , value : select.idProduct|e } ) }}</td>
                     <td class='nodre' style="width: 3%"></td>
-                    <td style="width: 7%">{{ selected.loginusers|e }}</td>
-                    <td style="width: 20%">{{ selected.usersname|e }}</td>
-                    <td style="width: 10%">{{ selected.emailusers|e }}</td>
-                    <td style="width: 10%">{{ selected.contactusers|e }}</td>
-                    <td style="width: 15%">{{ data.userGroup( selected.usersgroup|e ) }}</td>
-                    {% if selected.usersstat|e == 1 %}
-                    <td style="width: 5%;text-align:center;"><i class="fa fa-check-circle-o activ"></i></td>
-                    {% else %}
-                    <td style="width: 5%;text-align:center;"><i class="fa fa-times-circle-o desact"></i></td>
-                    {% endif %}
+                    <td style="width: 7%">{{ select.libelleProduct|e }}</td>
+                    <td style="width: 20%">{{ select.descriptionProduct|e }}</td>
+                    <td style="width: 10%">{{ select.quantityProduct|e}}</td>
+                    <td style="width: 10%">{{ select.priceProduct|e }}</td>
+                    <td style="width: 10%">{{ select.nameCategory|e }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         {{ actions_field(
         {
-        datas : data.ActionsUsers() ,
-        export : "List_of_users" ,
+        datas : data.actionCatego() ,
+        export : "List_of_product" ,
         pagination : pagination_field( current , nbrePage , total )
         })
         }}

@@ -110,13 +110,29 @@ class select extends SelectSelect
       /**
     * Request to select
     * @param string $value
-    * @return bool
+    * @return array
    */
-   public function listOfAllCategory(){
+   public function listOfAllCategory():array{
         
     $result = $this->table('category')
-                ->SQuery();
+                ->sdb(3)
+                ->SQuery('idCategory ,nameCategory');
 
+    return $result;
+}
+
+  /**
+    * Request to select
+    * @param string $value
+    * @return array
+   */
+  public function listOfAllProduct():array{
+        
+    $result = $this->table('product')
+                ->join(['category|idProduct=idcategory'])
+                ->limit(1,10)
+                ->sdb(3)
+                ->SQuery();
     return $result;
 }
 }

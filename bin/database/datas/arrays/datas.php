@@ -23,20 +23,16 @@ class datas
     
         return $key === null ? $list : ($list[$key] ?? 0);
     }
-    
-    public function categoryProd(
+    public function actionCatego(
         ?int $key = null
     ): mixed
     {
         $list = [
-            1 => 'SUPER ADMINISTRATOR',
-            2 => 'ADMINISTRATOR',
-            3 => 'USERS',
+            
         ];
     
         return $key === null ? $list : ($list[$key] ?? 0);
     }
-
     /**
      * Authorization actions
      * @param int $key
