@@ -95,14 +95,43 @@ class insert extends InsertInsert
             return false;
         }
     }
-    public function addProduct(string $name, string $description, string $quantity, string $price, string $category, string $source)
+
+    /**
+     * Request to save informations of one product in database
+     * @param string $name
+     * @param string $description
+     * @param string $quantity
+     * @param string $price
+     * @param string $category
+     * @param string $source
+     * @return bool
+     * 
+     */
+    public function addProduct(string $name, string $description, string $quantity, string $price, string $category, string $source): bool
     {
-        $this->table("product")
+        $result = $this->table("product")
             ->insert("libelleProduct, descriptionProduct, quantityProduct, priceProduct, idCategoryProduct, imageProduct")
             ->values('?,?,?,?,?,?')
             ->sdb(3)
-            ->param([$name,$description,$quantity,$price,$category,$source])
+            ->param([$name, $description, $quantity, $price, $category, $source])
             ->IQuery();
-        return true; 
+        return $result;
+    }
+
+    /**
+     * Request to save informations of one category in database
+     * @param string $nameCategory
+     * @return bool
+     */
+
+    public function addCategory(string $nameCategory): bool
+    {
+        $result = $this->table('category')
+            ->insert('nameCategory')
+            ->values('?')
+            ->sdb(3)
+            ->param([$nameCategory])
+            ->IQuery();
+        return $result;
     }
 }

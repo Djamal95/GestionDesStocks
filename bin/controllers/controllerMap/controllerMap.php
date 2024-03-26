@@ -8,6 +8,7 @@ use Epaphrodites\controllers\controllers\users;
 use Epaphrodites\controllers\controllers\chats;
 use Epaphrodites\controllers\controllers\setting;
 use Epaphrodites\controllers\controllers\dashboard;
+use Epaphrodites\controllers\controllers\category;
 use Epaphrodites\controllers\controllers\product;
 use Epaphrodites\controllers\controllers\test;
 
@@ -32,6 +33,7 @@ trait controllerMap
     private function controllerMap(): array
     {
         return [
+			'category' => [ new category, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
 			'product' => [ new product, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
             "api" => [ new api, 'SwitchApiControllers', false ],
             "chats" => [ new chats, 'SwitchControllers', true, _DIR_ADMIN_TEMP_ ],

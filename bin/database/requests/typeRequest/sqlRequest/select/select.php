@@ -109,7 +109,6 @@ class select extends SelectSelect
 
     /**
      * Request to get list of all category
-     * @param string $value
      * @return array
      */
     public function listOfAllCategory(): array
@@ -124,7 +123,6 @@ class select extends SelectSelect
 
     /**
      * Request to get list of all product
-     * @param string $value
      * @return array
      */
     public function listOfAllProduct(): array
