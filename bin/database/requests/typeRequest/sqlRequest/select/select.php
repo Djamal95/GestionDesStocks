@@ -15,9 +15,9 @@ class select extends SelectSelect
      * @return array
      */
     public function defaultSqlListeOfAllUsers(
-        int $page, 
+        int $page,
         int $numLines
-    ):array{
+    ): array {
 
         $result = $this->table('useraccount')
             ->orderBy('usersgroup', 'ASC')
@@ -37,7 +37,7 @@ class select extends SelectSelect
     public function sqlServerListeOfAllUsers(
         int $page,
         int $numLines
-    ):array{
+    ): array {
 
         $result = $this->table('useraccount')
             ->orderBy('usersgroup', 'ASC')
@@ -45,7 +45,7 @@ class select extends SelectSelect
             ->SQuery();
 
         return $result;
-    }    
+    }
 
     /**
      * Request to get users list
@@ -55,17 +55,17 @@ class select extends SelectSelect
      * @return array
      */
     public function sqlListOfRecentActions(
-        int $page, 
+        int $page,
         int $numLines
-    ):array{
+    ): array {
 
         return match (_FIRST_DRIVER_) {
 
-        'sqlserver' => $this->sqlServerListOfRecentActions( $page, $numLines),
+            'sqlserver' => $this->sqlServerListOfRecentActions($page, $numLines),
 
-        default => $this->defaultSqlListOfRecentActions( $page, $numLines)
+            default => $this->defaultSqlListOfRecentActions($page, $numLines)
         };
-    } 
+    }
 
     /**
      * Request to get list of users recents actions
@@ -77,7 +77,7 @@ class select extends SelectSelect
     public function defaultSqlListOfRecentActions(
         int $page,
         int $numLines
-    ):array{
+    ): array {
 
         $result = $this->table('recentactions')
             ->orderBy('dateactions', 'ASC')
@@ -85,8 +85,8 @@ class select extends SelectSelect
             ->SQuery();
 
         return $result;
-    }  
-    
+    }
+
     /**
      * Request to get list of users recents actions
      *
@@ -94,10 +94,10 @@ class select extends SelectSelect
      * @param integer $numLines
      * @return array
      */
-    public function sqlServerListOfRecentActions( 
+    public function sqlServerListOfRecentActions(
         int $page,
         int $numLines
-    ):array{
+    ): array {
 
         $result = $this->table('recentactions')
             ->orderBy('dateactions', 'ASC')
@@ -105,34 +105,55 @@ class select extends SelectSelect
             ->SQuery();
 
         return $result;
-    }    
-    
-      /**
-    * Request to select
-    * @param string $value
-    * @return array
-   */
-   public function listOfAllCategory():array{
-        
-    $result = $this->table('category')
-                ->sdb(3)
-                ->SQuery('idCategory ,nameCategory');
+    }
 
-    return $result;
-}
+    /**
+     * Request to get list of all category
+     * @param string $value
+     * @return array
+     */
+    public function listOfAllCategory(): array
+    {
 
-  /**
-    * Request to select
-    * @param string $value
-    * @return array
-   */
-  public function listOfAllProduct():array{
-        
-    $result = $this->table('product')
-                ->join(['category|idProduct=idcategory'])
-                ->limit(1,10)
-                ->sdb(3)
-                ->SQuery();
-    return $result;
-}
+        $result = $this->table('category')
+            ->sdb(3)
+            ->SQuery('idcategory ,nameCategory');
+
+        return $result;
+    }
+
+    /**
+     * Request to get list of all product
+     * @param string $value
+     * @return array
+     */
+    public function listOfAllProduct(): array
+    {
+
+        $result = $this->table('product')
+            ->join(['category|idCategoryProduct=idcategory'])
+            ->limit(1, 10)
+            ->sdb(3)
+            ->SQuery();
+            //var_dump($result);die;
+        return $result;
+    }
+
+    /**
+     * Request to find product by her id
+     * @param string $value
+     * @return bool
+     */
+    public function findProductById(int $id)
+    {
+
+        $result = $this->table('product')
+            ->join(['category|idCategoryProduct=idcategory'])
+            ->where('idProduct')
+            ->param([$id])
+            ->sdb(3)
+            ->SQuery();
+
+        return $result;
+    }
 }

@@ -23,6 +23,6 @@ final class delete extends DeleteDelete
     {
 
         return  static::initConfig()['delright']->EmptyAllUsersRight($usersGroup)===true ? true : false;
-    }    
+    }   
 
 }

@@ -23,12 +23,12 @@ class datas
     
         return $key === null ? $list : ($list[$key] ?? 0);
     }
-    public function actionCatego(
+    public function mainActions(
         ?int $key = null
     ): mixed
     {
         $list = [
-            
+            1 => 'DELETE'
         ];
     
         return $key === null ? $list : ($list[$key] ?? 0);

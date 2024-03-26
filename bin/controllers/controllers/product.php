@@ -8,6 +8,7 @@ final class product extends MainSwitchers
     private object $msg;
     private object $insert;
     private object $select;
+    private object $delete;
     private object $env;
     private string $alert = '';
     private string $ans = '';
@@ -29,6 +30,7 @@ final class product extends MainSwitchers
     {
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
+        $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
         $this->msg = $this->getFunctionObject(static::initNamespace(), 'msg');
         $this->env = $this->getFunctionObject(static::initNamespace(), 'env');
     }       
@@ -71,9 +73,12 @@ final class product extends MainSwitchers
     * @return void
     */
      public final function updateProduct(string $html): void{
-        $this->views( $html, [], true );
+        $idProduct = static::isGet('_see','int')? static::getGet('_see'): 0;
+        $listProduct = $this->select->findProductById($idProduct);
+        $this->views( $html, [
+            'product' => $listProduct
+        ], true );
     }
-
     /**
     * start view function
     * 
@@ -81,9 +86,25 @@ final class product extends MainSwitchers
     * @return void
     */
      public final function listOfAllProduct(string $html): void{
+        
+        if(static::isValidMethod(true)){
+            if(static::isSelected('_sendselected_',1)){
+                foreach(static::isArray('products') as $idproduct){
+                    $result = $this->delete->deleteProduct($idproduct);
+                }
+                if($result == true){
+                    $this->alert = "alert-success";
+                    $this->ans = $this->msg->answers("succes");
+                }
+            }
+        }
+        $listCategory = $this->select->listOfAllCategory();
+        $listOfAllProduct = $this->select->listOfAllProduct();
         $this->views( $html, [
-            'select' =>$this->select->listOfAllProduct(),
-            'data' => $this->select->listOfAllCategory()
+            'select' =>$listOfAllProduct,
+            'listCategory' => $listCategory,
+            'alert'=>$this->alert,
+            'reponse' => $this->ans
         ], true );
     }
 }
