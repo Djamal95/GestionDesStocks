@@ -117,21 +117,21 @@ class insert extends InsertInsert
             ->IQuery();
         return $result;
     }
-
     /**
-     * Request to save informations of one category in database
+     * Request to insert informations of one category
      * @param string $nameCategory
      * @return bool
-     */
-
-    public function addCategory(string $nameCategory): bool
-    {
-        $result = $this->table('category')
-            ->insert('nameCategory')
-            ->values('?')
-            ->sdb(3)
-            ->param([$nameCategory])
-            ->IQuery();
+    */
+    public function addCategory($nameCategory){
+        
+       $result = $this->table('category')
+                ->insert('nameCategory')
+                ->values('?')
+                ->sdb(3)
+                ->param([$nameCategory])
+                ->IQuery();
+    
         return $result;
-    }
+    
+        }
 }

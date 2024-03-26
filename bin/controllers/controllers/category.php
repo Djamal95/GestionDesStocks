@@ -26,9 +26,9 @@ final class category extends MainSwitchers
     */
     private function initializeObjects(): void
     {
+        $this->select = $this->getFunctionObject(static::initQuery(), 'select');
+        $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->msg = $this->getFunctionObject(static::initNamespace(), 'msg');
-        $this->select = $this->getFunctionObject(static::initNamespace(), 'select');
-        $this->insert = $this->getFunctionObject(static::initNamespace(), 'insert');
     }       
         
     /**
@@ -43,7 +43,7 @@ final class category extends MainSwitchers
         
 
     /**
-    * start view function
+    * add category
     * 
     * @param string $html
     * @return void
@@ -60,5 +60,30 @@ final class category extends MainSwitchers
             'alert' => $this->alert,
             'reponse' => $this->ans
         ], true );
+    }
+
+    /**
+    * get all category to display
+    * 
+    * @param string $html
+    * @return void
+    */
+     public final function listOfAllCategory(string $html): void{
+    
+        $result = $this->select->listOfAllCategory();
+        $this->views( $html, [
+            'select' => $result
+        ], true );
+    }
+
+    /**
+    * Request to update informations of one category
+    * 
+    * @param string $html
+    * @return void
+    */
+     public final function updateCategory(string $html): void{
+    
+        $this->views( $html, [], false );
     }
 }
