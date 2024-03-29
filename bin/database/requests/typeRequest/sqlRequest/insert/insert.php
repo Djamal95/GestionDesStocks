@@ -104,10 +104,10 @@ class insert extends InsertInsert
      * @param string $price
      * @param string $category
      * @param string $source
-     * @return bool
+     * @return string
      * 
      */
-    public function addProduct(string $name, string $description, string $quantity, string $price, string $category, string $source): bool
+    public function addProduct(string $name, string $description, string $quantity, string $price, string $category, string $source): string
     {
         $result = $this->table("product")
             ->insert("libelleProduct, descriptionProduct, quantityProduct, priceProduct, idCategoryProduct, imageProduct")
@@ -120,18 +120,79 @@ class insert extends InsertInsert
     /**
      * Request to insert informations of one category
      * @param string $nameCategory
-     * @return bool
-    */
-    public function addCategory($nameCategory){
-        
-       $result = $this->table('category')
-                ->insert('nameCategory')
-                ->values('?')
-                ->sdb(3)
-                ->param([$nameCategory])
-                ->IQuery();
-    
+     * @return string
+     */
+    public function addCategory($nameCategory): string
+    {
+
+        $result = $this->table('category')
+            ->insert('nameCategory')
+            ->values('?')
+            ->sdb(3)
+            ->param([$nameCategory])
+            ->IQuery();
+
         return $result;
-    
-        }
+    }
+
+    /**
+     * Request ton insert informations of one supplier
+     * @param string $nameFournisseur
+     * @param string $surnameFournisseur
+     * @param string $emailFournisseur
+     * @param string $contactFournisseur
+     * @param string $idEntreprisefour
+     * @return string
+     */
+
+    public function addSupplier($nameFournisseur, $surnameFournisseur, $emailFournisseur, $contactFournisseur, $idEntreprisefour): string
+    {
+
+        $result = $this->table('fournisseur')
+            ->insert('nameFourni, surnameFourni,emailFourni, contactFourni, idEntreprisefour')
+            ->values('?, ?, ?, ?, ?')
+            ->param([$nameFournisseur, $surnameFournisseur, $emailFournisseur, $contactFournisseur, $idEntreprisefour])
+            ->sdb(3)
+            ->IQuery();
+        return $result;
+    }
+
+    /**
+     * Request ton insert all informations of one entreprise
+     * @param string $nameEntreprise 
+     * @param string $contactEntreprise
+     * @param string $emailEntreprise
+     * @return string
+     */
+
+    public function addEntreprise(string $nameEntreprise, string $contactEntreprise, string $emailEntreprise): string
+    {
+        $result = $this->table('entreprise')
+            ->insert('nameEntreprise, contactEntreprise, emailEntreprise')
+            ->values('?,?,?')
+            ->param([$nameEntreprise, $contactEntreprise, $emailEntreprise])
+            ->sdb(3)
+            ->IQuery();
+        return $result;
+    }
+
+    /**
+     * Request to insert all informations of one client
+     * @param string $nameClient
+     * @param string $surnameClient
+     * @param string $emailClient
+     * @param string $passwordClient
+     * @return string
+     */
+
+    public function addClient(string $nameClient, string $surnameClient, string $emailClient, string $passwordClient): string
+    {
+        $result = $this->table("client")
+            ->insert("nameClient, surnameClient, emailClient, passwordClient")
+            ->values('?,?,?,?')
+            ->sdb(3)
+            ->param([$nameClient, $surnameClient, $emailClient, $passwordClient])
+            ->IQuery();
+        return $result;
+    }
 }

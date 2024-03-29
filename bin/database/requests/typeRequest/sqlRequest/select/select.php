@@ -83,7 +83,6 @@ class select extends SelectSelect
             ->orderBy('dateactions', 'ASC')
             ->limit((($page - 1) * $numLines), $numLines)
             ->SQuery();
-
         return $result;
     }
 
@@ -130,28 +129,145 @@ class select extends SelectSelect
 
         $result = $this->table('product')
             ->join(['category|idCategoryProduct=idcategory'])
+            ->sdb(3)
+            ->SQuery();
+        //var_dump($result);die;
+        return $result;
+    }
+    /**
+     * Request to get list of all stock
+     * @return array
+     */
+
+    public function listOfAllStock(): array
+    {
+        $result = $this->table('stock')
             ->limit(1, 10)
             ->sdb(3)
             ->SQuery();
-            //var_dump($result);die;
+        return $result;
+    }
+
+    /**
+     * Request to get list of all supplier
+     * @return array
+     */
+
+    public function listOfAllSupplier(): array
+    {
+        $result = $this->table('fournisseur')
+            ->join(['entreprise|idEntreprisefour=identreprise'])
+            ->sdb(3)
+            ->SQuery();
+        return $result;
+    }
+
+    /**
+     * Request to get list of all entreprise
+     * @return array
+     */
+
+    public function listOfAllEntreprise(): array
+    {
+        $result = $this->table('entreprise')
+            ->sdb(3)
+            ->SQuery();
+        return $result;
+    }
+
+    /**
+     * Request to get list of all client
+     * @return array
+     */
+
+    public function listOfAllClient(): array
+    {
+        $result = $this->table('client')
+            ->sdb(3)
+            ->SQuery();
+        return $result;
+    }
+
+    /**
+     * Request to find one client by her id
+     * @param int $idclient
+     * @return array
+     */
+
+    public function findClientById(int $idclient): array
+    {
+        $result = $this->table('client')
+            ->where('idclient')
+            ->sdb(3)
+            ->param([$idclient])
+            ->SQuery();
+        return $result;
+    }
+
+    /**
+     * Request to find one entreprise by her id
+     * @param int $identreprise
+     * @return array
+     */
+
+    public function findEntrepriseById(int $identreprise): array
+    {
+        $result = $this->table('entreprise')
+            ->where('identreprise')
+            ->sdb(3)
+            ->param([$identreprise])
+            ->SQuery();
+        return $result;
+    }
+
+    /**
+     * Request to find one fournisseur by her id
+     * @param int $id
+     * @return array
+     */
+    public function findSupplierById(int $id): array
+    {
+        $result = $this->table(('fournisseur'))
+            ->join(['entreprise|idEntreprisefour=identreprise'])
+            ->where('idfournisseur')
+            ->param([$id])
+            ->sdb(3)
+            ->SQuery();
         return $result;
     }
 
     /**
      * Request to find product by her id
-     * @param string $value
-     * @return bool
+     * @param int $id
+     * @return array
      */
-    public function findProductById(int $id)
+    public function findProductById(int $id): array
     {
 
         $result = $this->table('product')
             ->join(['category|idCategoryProduct=idcategory'])
-            ->where('idProduct')
+            ->where('idproduct')
             ->param([$id])
             ->sdb(3)
             ->SQuery();
 
+        return $result;
+    }
+
+    /**
+     * Method to find one category by her id
+     * @param int $id
+     * @return array
+     */
+
+    public function findCategoryById(int $id): array
+    {
+
+        $result = $this->table('category')
+            ->where('idcategory')
+            ->param([$id])
+            ->sdb(3)
+            ->SQuery();
         return $result;
     }
 }

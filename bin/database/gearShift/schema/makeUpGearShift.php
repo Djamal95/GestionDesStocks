@@ -15,7 +15,7 @@ trait makeUpGearShift
 
             $table->addColumn('idcategory', 'INTEGER(11)', ['AUTO_INCREMENT', 'PRIMARY KEY']);
             $table->addColumn('nameCategory', 'VARCHAR(100)');
-            $table->db(1);
+            $table->db(3);
         });
     }
 
@@ -30,7 +30,7 @@ trait makeUpGearShift
             $table->addColumn('idclient', 'INTEGER(11)', ['AUTO_INCREMENT', 'PRIMARY KEY']);
             $table->addColumn('nameClient', 'VARCHAR(100)');
             $table->addColumn('surnameClient', 'VARCHAR(100)');
-            $table->db(1);
+            $table->db(3);
         });
     }
 
@@ -50,7 +50,7 @@ trait makeUpGearShift
             $table->addColumn('idProductCommand', 'INTEGER(11)');
             $table->addIndex('idClient');
             $table->addIndex('idProductCommand');
-            $table->db(1);
+            $table->db(3);
         });
     }
 
@@ -68,7 +68,7 @@ trait makeUpGearShift
             $table->addColumn('idFourni', 'INTEGER(11)');
             $table->addIndex('idFourni');
 
-            $table->db(1);
+            $table->db(3);
         });
     }
     /**
@@ -86,7 +86,7 @@ trait makeUpGearShift
             $table->addColumn('contactFourni', 'VARCHAR(100)');
             $table->addColumn('idEntreprisefour', 'INTEGER(11)');
             $table->addIndex('idEntreprisefour');
-            $table->db(1);
+            $table->db(3);
         });
     }
 
@@ -107,7 +107,7 @@ trait makeUpGearShift
             $table->addColumn('imageProduct', 'VARCHAR(100)');
             $table->addIndex('idCategoryProduct');
 
-            $table->db(1);
+            $table->db(3);
         });
     }
 
@@ -123,7 +123,27 @@ trait makeUpGearShift
             $table->addColumn('nameEntreprise', 'VARCHAR(100)');
             $table->addColumn('contactEntreprise', 'VARCHAR(100)');
             $table->addColumn('emailEntreprise', 'VARCHAR(100)');
-            $table->db(1);
+            $table->db(3);
+        });
+    }
+
+    /**
+     * Create table stock
+     * Create 27/03/2024 09:20:41
+     */
+    public function createStockTable()
+    {
+        return $this->createTable('stock', function ($table) {
+
+            $table->addColumn('idstock', 'INTEGER', ['PRIMARY KEY', 'AUTO_INCREMENT']);
+            $table->addColumn('dateApprovisionnement', 'DATETIME');
+            $table->addColumn('etatStock', 'BOOLEAN');
+            $table->addColumn('idproduit', 'INTEGER');
+            $table->addIndex('idproduct');
+            $table->addColumn('idfournisseur', 'INTEGER');
+            $table->addIndex('idfournisseur');
+            $table->addColumn('quantityProduct', 'INTEGER');
+            $table->db(3);
         });
     }
 }

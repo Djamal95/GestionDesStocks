@@ -8,13 +8,14 @@ final class category extends MainSwitchers
     private object $msg;
     private object $select;
     private object $insert;
+    private object $delete;
     private string $alert =  '';
     private string $ans = '';
 
     /**
     * Initialize object properties when an instance is created
     * @return void
-    */    
+    */
     public final function __construct()
     {
         $this->initializeObjects();
@@ -28,9 +29,10 @@ final class category extends MainSwitchers
     {
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
+        $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
         $this->msg = $this->getFunctionObject(static::initNamespace(), 'msg');
     }       
-        
+
     /**
      * Start exemple page
      * @param string $html
@@ -40,11 +42,9 @@ final class category extends MainSwitchers
     {
         $this->views( $html, [], false );
     }     
-        
 
     /**
     * add category
-    * 
     * @param string $html
     * @return void
     */
@@ -64,26 +64,40 @@ final class category extends MainSwitchers
 
     /**
     * get all category to display
-    * 
     * @param string $html
     * @return void
     */
      public final function listOfAllCategory(string $html): void{
     
+        if(static::isValidMethod(true)){
+            if(static::isSelected('_sendselected_',1)){
+                foreach(static::isArray('categories') as $idcategory){
+                    $result = $this->delete->deleteCategory($idcategory);
+                }
+                if($result === true){
+                    $this->alert = "alert-success";
+                    $this->ans = $this->msg->answers('succes');
+                }
+            }
+        }
         $result = $this->select->listOfAllCategory();
         $this->views( $html, [
-            'select' => $result
+            'select' => $result,
+            'alert' =>$this->alert,
+            'reponse' => $this->ans
         ], true );
     }
 
     /**
     * Request to update informations of one category
-    * 
     * @param string $html
     * @return void
     */
      public final function updateCategory(string $html): void{
-    
-        $this->views( $html, [], false );
+        $idcategory = static::isGet('_see','int') ? static::getGet('_see') : 0;
+        $result = $this->select->findCategoryById($idcategory);
+        $this->views( $html, [
+            'category' => $result
+        ], true );
     }
 }
