@@ -31,17 +31,7 @@ final class stock extends MainSwitchers
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
-    }       
-    
-    /**
-     * Start exemple page
-     * @param string $html
-     * @return void
-    */      
-    public final function exemplePages(string $html): void
-    {
-        $this->views( $html, [], false );
-    }     
+    }            
 
     /**
     * start view function
@@ -49,7 +39,9 @@ final class stock extends MainSwitchers
     * @param string $html
     * @return void
     */
-     public final function listOfStock(string $html): void{
+     public final function listOfStock(
+        string $html
+    ): void{
 
         if (static::isValidMethod(true)) {
             if (static::isSelected('_sendselected_', 1)) {
@@ -62,9 +54,11 @@ final class stock extends MainSwitchers
                 }
             }
         }
-        $result = $this->select->listOfAllStock();
+        
+        $stockList = $this->select->listOfAllStock();
+
         $this->views($html, [
-            'stock' => $result,
+            'stock' => $stockList,
             'alert' => $this->alert,
             'reponse' => $this->ans
         ], true);
@@ -76,25 +70,31 @@ final class stock extends MainSwitchers
     * @param string $html
     * @return void
     */
-     public final function addStock(string $html): void{
+     public final function addStock(
+        string $html
+    ): void{
     
         if (static::isValidMethod(true) && static::arrayNoEmpty(['__date__', '__product__', '__supplier__','__quantity__'])) {
+           
             $result = $this->insert->addStock(
                 static::getPost('__date__'),
                 static::getPost('__product__'),
                 static::getPost('__supplier__'),
                 static::getPost('__quantity__'),
             );
+
             if ($result) {
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
             } else {
                 $this->alert = "alert-danger";
-                //$this->ans = $this->msg->answers("echec");
+                $this->ans = $this->msg->answers("error");
             }
         }
+
         $listSupplier = $this->select->listOfAllSupplier();
         $listProduct = $this->select->listOfAllProduct();
+
         $this->views($html, [
             'supplier' => $listSupplier,
             'product' => $listProduct,
@@ -109,11 +109,18 @@ final class stock extends MainSwitchers
     * @param string $html
     * @return void
     */
-     public final function updateStock(string $html): void{
+     public final function updateStock(
+        string $html
+    ): void{
+
         $idstock = static::isGet('_see','int')? static::getGet('_see'): 0;
+        $listProduct = $this->select->listOfAllProduct();
+        $listSupplier = $this->select->listOfAllSupplier();
         $listStock = $this->select->findStockById($idstock);
         $this->views( $html, [
             'stock' => $listStock,
+            'product' => $listProduct,
+            'supplier' => $listSupplier
         ], true );
     }
 }

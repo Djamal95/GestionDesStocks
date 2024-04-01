@@ -40,9 +40,12 @@ final class product extends MainSwitchers
     * @param string $html
     * @return void
     */
-     public final function addProduct(string $html): void{
+     public final function addProduct(
+        string $html
+    ): void{
         if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__quantity__','__price__','__Category__'])){
             $source = $_FILES['image']['name'];
+            
             $result = $this->insert->addProduct(
                 static::getPost('__name__'),
                 static::getPost('__description__'),
@@ -52,6 +55,7 @@ final class product extends MainSwitchers
                 $source
             );
             if($result){
+                
                 $this->env->UplaodFiles([_DIR_MEDIA_],[$source]);
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
@@ -72,11 +76,18 @@ final class product extends MainSwitchers
     * @param string $html
     * @return void
     */
-     public final function updateProduct(string $html): void{
+     public final function updateProduct(
+        string $html
+    ): void{
+
         $idProduct = static::isGet('_see','int')? static::getGet('_see'): 0;
+
+        $listCategory = $this->select->listOfAllCategory();
         $listProduct = $this->select->findProductById($idProduct);
+
         $this->views( $html, [
-            'product' => $listProduct
+            'product' => $listProduct,
+            'listCategory' => $listCategory
         ], true );
     }
     /**
@@ -85,7 +96,9 @@ final class product extends MainSwitchers
     * @param string $html
     * @return void
     */
-     public final function listOfAllProduct(string $html): void{
+     public final function listOfAllProduct(
+        string $html
+    ): void{
         
         if(static::isValidMethod(true)){
             if(static::isSelected('_sendselected_',1)){
@@ -98,8 +111,10 @@ final class product extends MainSwitchers
                 }
             }
         }
+
         $listCategory = $this->select->listOfAllCategory();
         $listOfAllProduct = $this->select->listOfAllProduct();
+
         $this->views( $html, [
             'select' =>$listOfAllProduct,
             'listCategory' => $listCategory,
