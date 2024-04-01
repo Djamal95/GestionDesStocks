@@ -142,7 +142,7 @@ class select extends SelectSelect
     public function listOfAllStock(): array
     {
         $result = $this->table('stock')
-            ->limit(1, 10)
+            ->join(['product|idproductstock=idproduct','fournisseur|idfournisseurstock=idfournisseur'])
             ->sdb(3)
             ->SQuery();
         return $result;
@@ -189,6 +189,24 @@ class select extends SelectSelect
     }
 
     /**
+     * Request to find one stock by her id
+     * @param int $idstock
+     * @return array
+     */
+
+    public function findStockById(int $idstock): array
+    {
+        $result = $this->table('stock')
+            ->join(['product|idproductstock=idproduct'])
+            ->join(['fournisseur|idfournisseurstock=idfournisseur'])
+            ->where('idstock')
+            ->param([$idstock])
+            ->sdb(3)
+            ->SQuery();
+        return $result;
+    }
+
+    /**
      * Request to find one client by her id
      * @param int $idclient
      * @return array
@@ -203,13 +221,11 @@ class select extends SelectSelect
             ->SQuery();
         return $result;
     }
-
     /**
      * Request to find one entreprise by her id
      * @param int $identreprise
      * @return array
      */
-
     public function findEntrepriseById(int $identreprise): array
     {
         $result = $this->table('entreprise')
@@ -219,23 +235,20 @@ class select extends SelectSelect
             ->SQuery();
         return $result;
     }
-
     /**
      * Request to find one fournisseur by her id
-     * @param int $id
+     * @param int $idfournisseur
      * @return array
      */
-    public function findSupplierById(int $id): array
+    public function findSupplierById(int $idfournisseur): array
     {
-        $result = $this->table(('fournisseur'))
-            ->join(['entreprise|idEntreprisefour=identreprise'])
+        $result = $this->table('fournisseur')
             ->where('idfournisseur')
-            ->param([$id])
+            ->param([$idfournisseur])
             ->sdb(3)
             ->SQuery();
         return $result;
     }
-
     /**
      * Request to find product by her id
      * @param int $id
@@ -250,19 +263,15 @@ class select extends SelectSelect
             ->param([$id])
             ->sdb(3)
             ->SQuery();
-
         return $result;
     }
-
     /**
      * Method to find one category by her id
      * @param int $id
      * @return array
      */
-
     public function findCategoryById(int $id): array
     {
-
         $result = $this->table('category')
             ->where('idcategory')
             ->param([$id])

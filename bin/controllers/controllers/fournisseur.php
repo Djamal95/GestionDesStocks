@@ -1,8 +1,9 @@
 <?php
+
 namespace Epaphrodites\controllers\controllers;
-        
+
 use Epaphrodites\controllers\switchers\MainSwitchers;
-        
+
 final class fournisseur extends MainSwitchers
 {
     private object $msg;
@@ -13,46 +14,47 @@ final class fournisseur extends MainSwitchers
     private string $ans = '';
 
     /**
-    * Initialize object properties when an instance is created
-    * @return void
-    */    
+     * Initialize object properties when an instance is created
+     * @return void
+     */
     public final function __construct()
     {
         $this->initializeObjects();
     }
 
     /**
-    * Initialize each property using values retrieved from static configurations
-    * @return void
-    */
+     * Initialize each property using values retrieved from static configurations
+     * @return void
+     */
     private function initializeObjects(): void
     {
         $this->msg = $this->getFunctionObject(static::initNamespace(), 'msg');
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
-    }       
-        
+    }
+
     /**
      * Start exemple page
      * @param string $html
      * @return void
-    */      
+     */
     public final function exemplePages(string $html): void
     {
-        $this->views( $html, [], false );
-    }     
-        
+        $this->views($html, [], false);
+    }
+
 
     /**
-    * start view function
-    * 
-    * @param string $html
-    * @return void
-    */
-     public final function addFournisseur(string $html): void{
-    
-        if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__surname__','__email__','__contact__','__entreprise__'])){
+     * start view function
+     * 
+     * @param string $html
+     * @return void
+     */
+    public final function addFournisseur(string $html): void
+    {
+
+        if (static::isValidMethod(true) && static::arrayNoEmpty(['__name__', '__surname__', '__email__', '__contact__', '__entreprise__'])) {
             $result = $this->insert->addSupplier(
                 static::getPost('__name__'),
                 static::getPost('__surname__'),
@@ -60,33 +62,34 @@ final class fournisseur extends MainSwitchers
                 static::getPost('__contact__'),
                 static::getPost('__entreprise__'),
             );
-            if($result){
+            if ($result) {
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
             }
         }
 
-        $this->views( $html, [
-            'entreprise'=>$this->select->listOfAllEntreprise(),
-            'alert'=>$this->alert,
+        $this->views($html, [
+            'entreprise' => $this->select->listOfAllEntreprise(),
+            'alert' => $this->alert,
             'reponse' => $this->ans
-        ], true );
+        ], true);
     }
 
     /**
-    * start view function
-    * 
-    * @param string $html
-    * @return void
-    */
-     public final function listOfAllFournisseur(string $html): void{
-    
-        if(static::isValidMethod(true)){
-            if(static::isSelected('_sendselected_',1)){
-                foreach(static::isArray('suppliers') as $idfournisseur){
+     * start view function
+     * 
+     * @param string $html
+     * @return void
+     */
+    public final function listOfAllFournisseur(string $html): void
+    {
+
+        if (static::isValidMethod(true)) {
+            if (static::isSelected('_sendselected_', 1)) {
+                foreach (static::isArray('suppliers') as $idfournisseur) {
                     $result = $this->delete->deleteSupplier($idfournisseur);
                 }
-                if($result == true){
+                if ($result == true) {
                     $this->alert = "alert-success";
                     $this->ans = $this->msg->answers("succes");
                 }
@@ -94,27 +97,26 @@ final class fournisseur extends MainSwitchers
         }
         $listEntreprise = $this->select->listOfAllEntreprise();
         $listOfAllSupplier = $this->select->listOfAllSupplier();
-        $this->views( $html, [
-            'supplier' =>$listOfAllSupplier,
+        $this->views($html, [
+            'supplier' => $listOfAllSupplier,
             'listEntreprise' => $listEntreprise,
-            'alert'=>$this->alert,
+            'alert' => $this->alert,
             'reponse' => $this->ans
-        ], true );
+        ], true);
     }
 
     /**
-    * start view function
-    * @param string $html
-    * @return void
-    */
-     public final function updateFournisseur(string $html): void{
-    
-        $idfournisseur = static::isGet('_see','int')? static::getGet('_see'): 0;
+     * start view function
+     * @param string $html
+     * @return void
+     */
+    public final function updateFournisseur(string $html): void
+    {
+
+        $idfournisseur = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
         $supplier = $this->select->findSupplierById($idfournisseur);
-        $listEntreprise = $this->select->listOfAllEntreprise();
-        $this->views( $html, [
+        $this->views($html, [
             'supplier' => $supplier,
-            'entreprise' => $listEntreprise
-        ], true );
+        ], true);
     }
 }

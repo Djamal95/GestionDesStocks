@@ -1,0 +1,51 @@
+{% extends layouts %}{% from breadcrumb import breadcrumb_field %} {% from breadcrumb import breadcrumb_field %} {% from message import alert_msg %}{% from forms
+    import input_field, import_field, select_field , loader ,submit %}{% block content %}{{ breadcrumb_field( 'ADD PROCUREMENT','stock@list_of_all_stock', 'PROCUREMENT LIST' )}}
+    <div class='container-fluid'>
+        {{ alert_msg(reponse, alert)}}
+        <form class="laodForm" method="post" novalidate>
+            <div class="row g-3">
+                {{ loader() }}{{ __csrf() }}
+                {{ input_field(
+                {
+                maxlength : 100 ,
+                require : true ,
+                type : "date",
+                name : '__date__' ,
+                label : 'Procurement Date' ,
+                feedback : 'Please enter Date .' ,
+                }
+                )}}
+                {{ select_field({
+                    label:"Product",
+                    name : "__product__",
+                    datas : product,
+                    value : 'idproduct',
+                    selected : 'libelleProduct',
+                    require : true })
+                }}
+                {{ select_field({
+                    label:"Supplier",
+                    name : "__supplier__",
+                    datas : supplier,
+                    value : 'idfournisseur',
+                    selected : 'nameFourni',
+                    require : true })
+                }}
+                {{ input_field(
+                {
+                maxlength : 10 ,
+                character : 'numeric',
+                require : true ,
+                name : '__quantity__' ,
+                label : 'Product Quantity' ,
+                feedback : 'Please enter the quantity.' ,
+                }
+                )}}
+                {{ submit({
+                label : 'Save your informations',
+                icon : 'bi bi-pen'
+                }) }}
+            </div>
+        </form>
+    </div>
+    {% endblock %}

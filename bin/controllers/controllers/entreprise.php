@@ -116,7 +116,7 @@ final class entreprise extends MainSwitchers
         $identreprise = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
         $entreprise = $this->select->findEntrepriseById($identreprise);
         $this->views($html, [
-            'Entreprise' => $entreprise
+            'entreprise' => $entreprise
         ], true);
     }
 }

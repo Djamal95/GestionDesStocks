@@ -2,6 +2,7 @@
 
 namespace Epaphrodites\database\requests\typeRequest\sqlRequest\insert;
 
+use DateTime;
 use Epaphrodites\database\requests\typeRequest\noSqlRequest\insert\insert as InsertInsert;
 
 class insert extends InsertInsert
@@ -192,6 +193,25 @@ class insert extends InsertInsert
             ->values('?,?,?,?')
             ->sdb(3)
             ->param([$nameClient, $surnameClient, $emailClient, $passwordClient])
+            ->IQuery();
+        return $result;
+    }
+
+    /**
+     * Method to register procurement
+     * @param string $dateApprovisionnement
+     * @param int  $idproductstock
+     * @param int $idfournisseurstock
+     * @param int $quantityProduct
+     * @return string
+     */
+    public function addStock(string $dateApprovisionnement, int $idproductstock, int $idfournisseurstock, int $quantityProduct):string{
+
+        $result = $this->table("stock")
+            ->insert("dateApprovisionnement,etatStock,idproductstock,idfournisseurstock,quantityProduct")
+            ->values("?,1,?,?,?")
+            ->param([$dateApprovisionnement,$idproductstock,$idfournisseurstock,$quantityProduct])
+            ->sdb(3)
             ->IQuery();
         return $result;
     }

@@ -84,4 +84,20 @@ class delete extends DeleteDelete
             ->DQuery();
         return $result == 1 ? true : false;
     }
+
+    /**
+     * Delete stock by her id
+     * @param int $idstock
+     * @return bool
+     */
+
+     public function deleteStock(int $idstock): bool
+     {
+         $result = $this->table('stock')
+             ->where('idstock')
+             ->param([$idstock])
+             ->sdb(3)
+             ->DQuery();
+         return $result == 1 ? true : false;
+     }
 }

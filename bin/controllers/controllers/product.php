@@ -75,10 +75,8 @@ final class product extends MainSwitchers
      public final function updateProduct(string $html): void{
         $idProduct = static::isGet('_see','int')? static::getGet('_see'): 0;
         $listProduct = $this->select->findProductById($idProduct);
-        $catego = $this->select->listOfAllCategory();
         $this->views( $html, [
-            'product' => $listProduct,
-            'select'=>$catego
+            'product' => $listProduct
         ], true );
     }
     /**
