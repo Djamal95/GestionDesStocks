@@ -85,13 +85,13 @@ class sqlDatabase extends SwitchDatabase implements DatabaseRequest
                 $this->closeConnection($db);
             }
 
-           $connection->commit();
+            $connection->commit();
             return $result;
             
         } catch (\Exception $e) {
-             if ($connection->inTransaction()) {
+            if ($connection->inTransaction()) {
                 $connection->rollBack();
-            } 
+            }
             return false;
         }
     }

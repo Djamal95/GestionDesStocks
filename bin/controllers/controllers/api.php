@@ -45,21 +45,4 @@ final class api extends HerediaApiSwitcher
 
         return $this->Response->JsonResponse($code, $Result);
     }   
-
-    /**
-    * make your api
-    */
-     public final function epaphroditeApi(){
-    
-        $Result = [];
-        $code = 400;
-
-        if (static::isValidApiMethod(false,'GET')) {
-
-            $code = 200;
-            $Result = ['this' , 'is' , 'api' , 'result' , 'test']; 
-        }
-
-        return $this->Response->JsonResponse($code, $Result);
-    }
 }
