@@ -138,10 +138,10 @@ trait makeUpGearShift
             $table->addColumn('idstock', 'INTEGER', ['PRIMARY KEY', 'AUTO_INCREMENT']);
             $table->addColumn('dateApprovisionnement', 'DATETIME');
             $table->addColumn('etatStock', 'BOOLEAN');
-            $table->addColumn('idproduit', 'INTEGER');
-            $table->addIndex('idproduct');
-            $table->addColumn('idfournisseur', 'INTEGER');
-            $table->addIndex('idfournisseur');
+            $table->addColumn('idproductstock', 'INTEGER');
+            $table->addIndex('idproductstock');
+            $table->addColumn('idfournisseurstock', 'INTEGER');
+            $table->addIndex('idfournisseurstock');
             $table->addColumn('quantityProduct', 'INTEGER');
             $table->db(3);
         });

@@ -1,5 +1,5 @@
 {% extends layouts %} {% from breadcrumb import breadcrumb_field %} {% from message import alert_msg %}{% from forms
-import filter_search , loader, checkbox_field, actions_field, select_field %}{% from pagination import pagination_field
+import filter_search , loader, checkbox_field, actions_field, select_field %}{% from pagination import dataTable_pagination
 %}{% block content %}
 <div class='container-fluid'>
     {{ breadcrumb_field( 'PLATFORM CATEGORY LIST' )}} {{ alert_msg( reponse , alert ) }}
@@ -46,9 +46,9 @@ import filter_search , loader, checkbox_field, actions_field, select_field %}{% 
         </table>
         {{ actions_field(
         {
-        datas : data.mainActions() ,
-        export : "List_of_category" ,
-        pagination : pagination_field( current , nbrePage , total )
+            datas : data.mainActions() ,
+            export : "List_of_category" ,
+            pagination : dataTable_pagination()
         })
         }}
     </form>

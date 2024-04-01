@@ -50,11 +50,13 @@ import input_field, select_field, import_field, loader , submit %} {% block cont
             }
             )}}
             {{ select_field({
-            label:"Category Product",
-            name : "__Category__",
-            value : product.nameCategory,
-            datas : select,
-            require : true })
+                label:"Category Product",
+                name : "__Category__",
+                datas : listCategory,
+                value : 'idcategory',
+                selected : 'nameCategory',
+                position : product.idCategoryProduct,
+                require : true })
             }}
             {% endfor %}
             {{ import_field({

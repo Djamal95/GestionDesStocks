@@ -67,9 +67,12 @@ final class category extends MainSwitchers
     * @param string $html
     * @return void
     */
-     public final function listOfAllCategory(string $html): void{
+     public final function listOfAllCategory(
+        string $html
+    ): void{
     
         if(static::isValidMethod(true)){
+
             if(static::isSelected('_sendselected_',1)){
                 foreach(static::isArray('categories') as $idcategory){
                     $result = $this->delete->deleteCategory($idcategory);
@@ -80,9 +83,11 @@ final class category extends MainSwitchers
                 }
             }
         }
-        $result = $this->select->listOfAllCategory();
+
+        $categoryList = $this->select->listOfAllCategory();
+
         $this->views( $html, [
-            'select' => $result,
+            'select' => $categoryList,
             'alert' =>$this->alert,
             'reponse' => $this->ans
         ], true );
@@ -93,7 +98,9 @@ final class category extends MainSwitchers
     * @param string $html
     * @return void
     */
-     public final function updateCategory(string $html): void{
+     public final function updateCategory(
+        string $html
+    ): void{
         $idcategory = static::isGet('_see','int') ? static::getGet('_see') : 0;
         $result = $this->select->findCategoryById($idcategory);
         $this->views( $html, [
