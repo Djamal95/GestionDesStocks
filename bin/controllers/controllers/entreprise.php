@@ -67,7 +67,7 @@ final class entreprise extends MainSwitchers
                 $this->ans = $this->msg->answers("succes");
             } else {
                 $this->alert = "alert-danger";
-                //$this->ans = $this->msg->answers("echec");
+                $this->ans = $this->msg->answers("error");
             }
         }
         $this->views($html, [
@@ -93,6 +93,9 @@ final class entreprise extends MainSwitchers
                 if ($result == true) {
                     $this->alert = "alert-success";
                     $this->ans = $this->msg->answers("succes");
+                }else{
+                    $this->alert = "alert-danger";
+                    $this->ans = $this->msg->answers("error");
                 }
             }
         }
@@ -112,11 +115,27 @@ final class entreprise extends MainSwitchers
      */
     public final function updateEntreprise(string $html): void
     {
+        if (static::isValidMethod(true) && static::arrayNoEmpty(['__name__', '__contact__', '__email__'])) {
+            $result = $this->insert->addEntreprise(
+                static::getPost('__name__'),
+                static::getPost('__contact__'),
+                static::getPost('__email__'),
+            );
+            if ($result) {
+                $this->alert = "alert-success";
+                $this->ans = $this->msg->answers("succes");
+            } else {
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers("error");
+            }
+        }
 
         $identreprise = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
         $entreprise = $this->select->findEntrepriseById($identreprise);
         $this->views($html, [
-            'entreprise' => $entreprise
+            'entreprise' => $entreprise,
+            'alert' => $this->alert,
+            'reponse' => $this->ans
         ], true);
     }
 }

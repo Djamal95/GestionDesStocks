@@ -9,6 +9,7 @@ final class product extends MainSwitchers
     private object $insert;
     private object $select;
     private object $delete;
+    private object $update;
     private object $env;
     private string $alert = '';
     private string $ans = '';
@@ -31,6 +32,7 @@ final class product extends MainSwitchers
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
         $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
+        $this->update = $this->getFunctionObject(static::initQuery(), 'update');
         $this->msg = $this->getFunctionObject(static::initNamespace(), 'msg');
         $this->env = $this->getFunctionObject(static::initNamespace(), 'env');
     }       
@@ -55,10 +57,12 @@ final class product extends MainSwitchers
                 $source
             );
             if($result){
-                
                 $this->env->UplaodFiles([_DIR_MEDIA_],[$source]);
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
+            }else{
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers("error");
             }
         }
 
@@ -79,15 +83,40 @@ final class product extends MainSwitchers
      public final function updateProduct(
         string $html
     ): void{
-
         $idProduct = static::isGet('_see','int')? static::getGet('_see'): 0;
-
         $listCategory = $this->select->listOfAllCategory();
         $listProduct = $this->select->findProductById($idProduct);
 
+        if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__quantity__','__price__','__Category__'])){
+            $source = $_FILES['image']['name'];
+            
+            $result = $this->update->updateProduct(
+                $idProduct,
+                static::getPost('__name__'),
+                static::getPost('__description__'),
+                static::getPost('__quantity__'),
+                static::getPost('__price__'),
+                static::getPost('__Category__'),
+                $source
+            );
+            if($result){
+                $this->env->UplaodFiles([_DIR_MEDIA_],[$source]);
+                $this->alert = "alert-success";
+                $this->ans = $this->msg->answers("succes");
+            }else{
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers("error");
+            }
+        }
+        
+
+
+
         $this->views( $html, [
             'product' => $listProduct,
-            'listCategory' => $listCategory
+            'listCategory' => $listCategory,
+            'alert' => $this->alert,
+            'reponse' => $this->ans
         ], true );
     }
     /**
@@ -108,6 +137,9 @@ final class product extends MainSwitchers
                 if($result == true){
                     $this->alert = "alert-success";
                     $this->ans = $this->msg->answers("succes");
+                }else{
+                    $this->alert = "alert-danger";
+                    $this->ans = $this->msg->answers("error");
                 }
             }
         }

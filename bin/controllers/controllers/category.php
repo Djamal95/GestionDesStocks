@@ -9,6 +9,7 @@ final class category extends MainSwitchers
     private object $select;
     private object $insert;
     private object $delete;
+    private object $update;
     private string $alert =  '';
     private string $ans = '';
 
@@ -30,6 +31,7 @@ final class category extends MainSwitchers
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
+        $this->update = $this->getFunctionObject(static::initQuery(), 'update');
         $this->msg = $this->getFunctionObject(static::initNamespace(), 'msg');
     }       
 
@@ -54,6 +56,9 @@ final class category extends MainSwitchers
             if($result){
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers('succes');
+            }else{
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers('error');
             }
         }
         $this->views( $html, [
@@ -80,6 +85,9 @@ final class category extends MainSwitchers
                 if($result === true){
                     $this->alert = "alert-success";
                     $this->ans = $this->msg->answers('succes');
+                }else{
+                    $this->alert = "alert-danger";
+                    $this->ans = $this->msg->answers('error');
                 }
             }
         }
@@ -102,9 +110,25 @@ final class category extends MainSwitchers
         string $html
     ): void{
         $idcategory = static::isGet('_see','int') ? static::getGet('_see') : 0;
-        $result = $this->select->findCategoryById($idcategory);
+        $category = $this->select->findCategoryById($idcategory);
+
+        if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__'])){
+            $result = $this->update->updateCategory(
+                $idcategory,
+                static::getPost('__name__')
+            );
+            if($result){
+                $this->alert = "alert-success";
+                $this->ans = $this->msg->answers('succes');
+            }else{
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers('error');
+            }
+        }
         $this->views( $html, [
-            'category' => $result
+            'category' => $category,
+            'alert' => $this->alert,
+            'reponse' => $this->ans
         ], true );
     }
 }

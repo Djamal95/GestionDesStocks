@@ -15,8 +15,7 @@ class update extends UpdateUpdate
      */
     public function chat_messages(
         string $users
-    ): bool
-    {
+    ): bool {
         $this->table('chatsmessages')
             ->set(['etatmessages'])
             ->where('emetteur')
@@ -36,11 +35,10 @@ class update extends UpdateUpdate
      * @return int|bool
      */
     public function sqlChangeUsersPassword(
-        string $OldPassword, 
-        string $NewPassword, 
+        string $OldPassword,
+        string $NewPassword,
         string $confirmdp
-    ):int|bool
-    {
+    ): int|bool {
 
         if (static::initConfig()['guard']->GostCrypt($NewPassword) === static::initConfig()['guard']->GostCrypt($confirmdp)) {
 
@@ -84,11 +82,10 @@ class update extends UpdateUpdate
      * @return bool
      */
     public function sqlConsoleUpdateUsers(
-        ?string $login = NULL, 
-        ?string $password = NULL, 
+        ?string $login = NULL,
+        ?string $password = NULL,
         ?int $UserGroup = NULL
-    ): bool
-    {
+    ): bool {
         $GetDatas = static::initQuery()['getid']->sqlGetUsersDatas($login);
 
         if (!empty($GetDatas)) {
@@ -116,8 +113,7 @@ class update extends UpdateUpdate
      */
     public function sqlInitUsersPassword(
         string $UsersLogin
-    ): bool
-    {
+    ): bool {
 
         $this->table('useraccount')
             ->set(['userspwd'])
@@ -139,9 +135,8 @@ class update extends UpdateUpdate
      */
     public function sqlUpdateEtatsUsers(
         string $login
-    ): bool
-    {
-        
+    ): bool {
+
         $GetUsersDatas = static::initQuery()['getid']->sqlGetUsersDatas($login);
 
         if (!empty($GetUsersDatas)) {
@@ -159,10 +154,10 @@ class update extends UpdateUpdate
                 ->like('loginusers')
                 ->param([$state, $GetUsersDatas[0]['loginusers']])
                 ->UQuery();
-              
+
             $actions = $etatExact . " of the user's account : " . $GetUsersDatas[0]['loginusers'];
             static::initQuery()['setting']->ActionsRecente($actions);
-           
+
             return true;
         } else {
             return false;
@@ -178,12 +173,11 @@ class update extends UpdateUpdate
      * @return mixed
      */
     public function sqlUpdateUserDatas(
-        string $usersname, 
-        string $email, 
+        string $usersname,
+        string $email,
         string $number
-    ):mixed
-    {
-        
+    ): mixed {
+
         if (static::initNamespace()['verify']->onlyNumber($number, 11) === false) {
 
             $this->table('useraccount')
@@ -208,5 +202,151 @@ class update extends UpdateUpdate
         } else {
             return false;
         }
+    }
+
+    /**
+     * Method to update informations of one product
+     * @param int $idproduct
+     * @param string $libelleProduct
+     * @param string $descriptionProduct
+     * @param int $quantityProduct
+     * @param int $priceProduct
+     * @param int $idCategoryProduct
+     * @param string $image
+     * @return bool
+     */
+
+    public function updateProduct(
+        int $idproduct,
+        string $libelleProduct,
+        string $descriptionProduct,
+        int $quantityProduct,
+        int $priceProduct,
+        int $idCategoryProduct,
+        string $image
+    ): bool {
+        $result = $this->table('product')
+            ->set(['libelleProduct,descriptionProduct,quantityProduct,priceProduct,idCategogryProduct,imageProduct'])
+            ->where('idproduct')
+            ->param([$libelleProduct, $descriptionProduct, $quantityProduct, $priceProduct, $idCategoryProduct, $image, $idproduct])
+            ->UQuery();
+        return true;
+    }
+
+    /**
+     * Method to update informations of one category
+     * @param int $idcategory
+     * @param string $nameCategory
+     * @return bool
+     */
+
+    public function updateCategory(
+        int $idcategory,
+        string $nameCategory,
+    ): bool {
+        $result = $this->table('category')
+            ->set(['nameCategory'])
+            ->where('idcategory')
+            ->param([$nameCategory, $idcategory])
+            ->UQuery();
+        return $result;
+    }
+    /**
+     * Method to update informations of one client
+     * @param int $idclient
+     * @param string $nameClient
+     * @param string $surnameClient
+     * @param string $emailClient
+     * @param string $passwordClient
+     * @return bool
+     */
+
+    public function updateClient(
+        int $idclient,
+        string $nameClient,
+        string $surnameClient,
+        string $emailClient,
+        string $passwordClient,
+    ): bool {
+        $result = $this->table('client')
+            ->set(['nameClient,surnameClient,emailClient,passwordClient'])
+            ->where('idclient')
+            ->param([$nameClient,$surnameClient,$emailClient,$passwordClient, $idclient])
+            ->UQuery();
+        return $result;
+    }
+
+    /**
+     * Method to update informatios of one entreprise
+     * @param int $identreprise
+     * @param string $nameEntreprise
+     * @param string $contactEntreprise
+     * @param string $emailEntreprise
+     * @return bool
+     */
+
+     public function updateEntreprise(
+        int $identreprise,
+        string $nameEntreprise,
+        string $contactEntreprise,
+        string $emailEntreprise,
+    ): bool {
+        $result = $this->table('entreprise')
+            ->set(['nameEntreprise,contactEntreprise,emailEntreprise'])
+            ->where('identreprise')
+            ->param([$nameEntreprise,$contactEntreprise,$emailEntreprise, $identreprise])
+            ->UQuery();
+        return $result;
+    }
+    
+    /**
+     * Method to update informations of one fournisseur
+     * @param int $idfournisseur
+     * @param string $nameFourni
+     * @param string $surnameFourni
+     * @param string $emailFourni
+     * @param string $contactFourni
+     * @param int $idEntreprisefour
+     * @return bool
+     */
+     public function updateSupplier(
+        int $idfournisseur,
+        string $nameFourni,
+        string $surnameFourni,
+        string $emailFourni,
+        string $contactFourni,
+        int $idEntreprisefour
+    ): bool {
+        $result = $this->table('fournisseur')
+            ->set(['nameFourni,surnameFourni,emailFourni,contactFourni,idEntreprisefour'])
+            ->where('idfournisseur')
+            ->param([$nameFourni,$surnameFourni,$emailFourni, $contactFourni,$idEntreprisefour,$idfournisseur])
+            ->UQuery();
+            var_dump($result);die;
+        return $result;
+    }
+    /**
+     * Method to update informations of one entreprise
+     * @param int $idfournisseur
+     * @param string $nameFourni
+     * @param string $surnameFourni
+     * @param string $emailFourni
+     * @param string $contactFourni
+     * @param int $idEntreprisefour
+     * @return bool
+     */
+     public function updateStock(
+        int $idstock,
+        string $dateApprovisionnement,
+        int $idproductstock,
+        string $idfournisseurstock,
+        string $quantityProduct,
+    ): bool {
+        $result = $this->table('stock')
+            ->set(['dateApprovisionnement,idproductstock,idfournisseurstock,quantityProduct'])
+            ->where('idstock')
+            ->param([$dateApprovisionnement,$idproductstock,$idfournisseurstock, $quantityProduct,$idstock])
+            ->UQuery();
+        return $result;
     }
 }

@@ -51,6 +51,9 @@ final class stock extends MainSwitchers
                 if ($result == true) {
                     $this->alert = "alert-success";
                     $this->ans = $this->msg->answers("succes");
+                }else{
+                    $this->alert = "alert-danger";
+                    $this->ans = $this->msg->answers("error");
                 }
             }
         }
@@ -112,6 +115,23 @@ final class stock extends MainSwitchers
      public final function updateStock(
         string $html
     ): void{
+        if (static::isValidMethod(true) && static::arrayNoEmpty(['__date__', '__product__', '__supplier__','__quantity__'])) {
+           
+            $result = $this->insert->addStock(
+                static::getPost('__date__'),
+                static::getPost('__product__'),
+                static::getPost('__supplier__'),
+                static::getPost('__quantity__'),
+            );
+
+            if ($result) {
+                $this->alert = "alert-success";
+                $this->ans = $this->msg->answers("succes");
+            } else {
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers("error");
+            }
+        }
 
         $idstock = static::isGet('_see','int')? static::getGet('_see'): 0;
         $listProduct = $this->select->listOfAllProduct();
@@ -120,7 +140,9 @@ final class stock extends MainSwitchers
         $this->views( $html, [
             'stock' => $listStock,
             'product' => $listProduct,
-            'supplier' => $listSupplier
+            'supplier' => $listSupplier,
+            'alert' => $this->alert,
+            'reponse' => $this->ans
         ], true );
     }
 }
