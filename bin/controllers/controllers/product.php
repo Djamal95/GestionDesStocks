@@ -8,8 +8,8 @@ final class product extends MainSwitchers
     private object $msg;
     private object $insert;
     private object $select;
-    private object $delete;
     private object $update;
+    private object $delete;
     private object $env;
     private string $alert = '';
     private string $ans = '';
@@ -46,8 +46,11 @@ final class product extends MainSwitchers
         string $html
     ): void{
         if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__quantity__','__price__','__Category__'])){
-            $source = $_FILES['image']['name'];
             
+            $source = static::getFileName('image');
+
+            $this->env->uploadFiles([_DIR_IMG_, 'image']);
+
             $result = $this->insert->addProduct(
                 static::getPost('__name__'),
                 static::getPost('__description__'),
@@ -57,12 +60,10 @@ final class product extends MainSwitchers
                 $source
             );
             if($result){
-                $this->env->UplaodFiles([_DIR_MEDIA_],[$source]);
+                
+               
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
-            }else{
-                $this->alert = "alert-danger";
-                $this->ans = $this->msg->answers("error");
             }
         }
 
@@ -83,40 +84,39 @@ final class product extends MainSwitchers
      public final function updateProduct(
         string $html
     ): void{
-        $idProduct = static::isGet('_see','int')? static::getGet('_see'): 0;
-        $listCategory = $this->select->listOfAllCategory();
-        $listProduct = $this->select->findProductById($idProduct);
+
+        $idProduct = static::isGet('_product','int')? static::getGet('_product'): 0;
 
         if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__quantity__','__price__','__Category__'])){
+
             $source = static::getFileName('image');
-            
             $result = $this->update->updateProduct(
-                $idProduct,
-                static::getPost('__name__'),
-                static::getPost('__description__'),
-                static::getPost('__quantity__'),
-                static::getPost('__price__'),
-                static::getPost('__Category__'),
-                $source
+                        static::getPost('__name__'),
+                        static::getPost('__description__'),
+                        static::getPost('__quantity__'),
+                        static::getPost('__price__'),
+                        static::getPost('__Category__'),
+                        $source,
+                        $idProduct
             );
+
             if($result){
-                $this->env->uplaodFiles([_DIR_MEDIA_ => 'image']);
+                
+                $this->env->uploadFiles([_DIR_MEDIA_, 'image']);
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
-            }else{
-                $this->alert = "alert-danger";
-                $this->ans = $this->msg->answers("error");
             }
+
         }
-        
 
-
+        $listCategory = $this->select->listOfAllCategory();
+        $listProduct = $this->select->findProductById($idProduct);
 
         $this->views( $html, [
             'product' => $listProduct,
             'listCategory' => $listCategory,
-            'alert' => $this->alert,
-            'reponse' => $this->ans
+            'alert'=>$this->alert,
+            'answers' => $this->ans
         ], true );
     }
     /**
@@ -137,9 +137,6 @@ final class product extends MainSwitchers
                 if($result == true){
                     $this->alert = "alert-success";
                     $this->ans = $this->msg->answers("succes");
-                }else{
-                    $this->alert = "alert-danger";
-                    $this->ans = $this->msg->answers("error");
                 }
             }
         }

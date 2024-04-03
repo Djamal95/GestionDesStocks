@@ -15,7 +15,8 @@ class update extends UpdateUpdate
      */
     public function chat_messages(
         string $users
-    ): bool {
+    ): bool
+    {
         $this->table('chatsmessages')
             ->set(['etatmessages'])
             ->where('emetteur')
@@ -35,10 +36,11 @@ class update extends UpdateUpdate
      * @return int|bool
      */
     public function sqlChangeUsersPassword(
-        string $OldPassword,
-        string $NewPassword,
+        string $OldPassword, 
+        string $NewPassword, 
         string $confirmdp
-    ): int|bool {
+    ):int|bool
+    {
 
         if (static::initConfig()['guard']->GostCrypt($NewPassword) === static::initConfig()['guard']->GostCrypt($confirmdp)) {
 
@@ -82,10 +84,11 @@ class update extends UpdateUpdate
      * @return bool
      */
     public function sqlConsoleUpdateUsers(
-        ?string $login = NULL,
-        ?string $password = NULL,
+        ?string $login = NULL, 
+        ?string $password = NULL, 
         ?int $UserGroup = NULL
-    ): bool {
+    ): bool
+    {
         $GetDatas = static::initQuery()['getid']->sqlGetUsersDatas($login);
 
         if (!empty($GetDatas)) {
@@ -113,7 +116,8 @@ class update extends UpdateUpdate
      */
     public function sqlInitUsersPassword(
         string $UsersLogin
-    ): bool {
+    ): bool
+    {
 
         $this->table('useraccount')
             ->set(['userspwd'])
@@ -135,8 +139,9 @@ class update extends UpdateUpdate
      */
     public function sqlUpdateEtatsUsers(
         string $login
-    ): bool {
-
+    ): bool
+    {
+        
         $GetUsersDatas = static::initQuery()['getid']->sqlGetUsersDatas($login);
 
         if (!empty($GetUsersDatas)) {
@@ -154,10 +159,10 @@ class update extends UpdateUpdate
                 ->like('loginusers')
                 ->param([$state, $GetUsersDatas[0]['loginusers']])
                 ->UQuery();
-
+              
             $actions = $etatExact . " of the user's account : " . $GetUsersDatas[0]['loginusers'];
             static::initQuery()['setting']->ActionsRecente($actions);
-
+           
             return true;
         } else {
             return false;
@@ -173,11 +178,12 @@ class update extends UpdateUpdate
      * @return mixed
      */
     public function sqlUpdateUserDatas(
-        string $usersname,
-        string $email,
+        string $usersname, 
+        string $email, 
         string $number
-    ): mixed {
-
+    ):mixed
+    {
+        
         if (static::initNamespace()['verify']->onlyNumber($number, 11) === false) {
             $this->table('useraccount')
                 ->set(['contactusers', 'emailusers', 'usersname', 'usersstat'])
@@ -203,36 +209,29 @@ class update extends UpdateUpdate
         }
     }
 
-    /**
-     * Method to update informations of one product
-     * @param int $idproduct
-     * @param string $libelleProduct
-     * @param string $descriptionProduct
-     * @param int $quantityProduct
-     * @param int $priceProduct
-     * @param int $idCategoryProduct
-     * @param string $image
+        /**
+     * Request to save informations of one product in database
+     * @param string $name
+     * @param string $description
+     * @param string $quantity
+     * @param int $price
+     * @param int $category
+     * @param string $source
+     * @param int $idProduct
      * @return bool
+     * 
      */
+    public function updateProduct(string $name, string $description, string $quantity, string $price, string $category, string $source, int $idProduct): bool
+    {
 
-    public function updateProduct(
-        int $idproduct,
-        string $libelleProduct,
-        string $descriptionProduct,
-        int $quantityProduct,
-        int $priceProduct,
-        int $idCategoryProduct,
-        string $image
-    ): bool {
-        $result = $this->table('product')
-            ->set(['libelleProduct,descriptionProduct,quantityProduct,priceProduct,idCategogryProduct,imageProduct'])
+        $this->table('product')
+            ->set(['libelleProduct', 'descriptionProduct', 'quantityProduct', 'priceProduct', 'idCategoryProduct', 'imageProduct'])
             ->where('idproduct')
-            ->sdb(3)
-            ->param([$libelleProduct, $descriptionProduct, $quantityProduct, $priceProduct, $idCategoryProduct, $image, $idproduct])
+            ->param([$name, $description, $quantity, $price, $category, $source, $idProduct])
             ->UQuery();
+
         return true;
     }
-
     /**
      * Method to update informations of one category
      * @param int $idcategory

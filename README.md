@@ -15,6 +15,7 @@ What you should know before starting the installation. To create a new applicati
 - MongoDB Extension (if you use MongoDB)
 - Redis Extension (if you use Redis)
 - Mbstring PHP Extension
+- intl PHP Extension
 - XML PHP Extension
 - ZIP PHP Extension
 - JSON PHP Extension

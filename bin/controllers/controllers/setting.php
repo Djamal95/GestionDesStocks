@@ -56,7 +56,9 @@ final class setting extends MainSwitchers
      * @param string $html
      * @return void
      */
-    public final function assignUserAccessRights(string $html): void
+    public final function assignUserAccessRights(
+        string $html
+    ): void
     {
 
         $userGroup = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
@@ -95,7 +97,9 @@ final class setting extends MainSwitchers
      * @param string $html
      * @return void
      */
-    public final function listOfUserRightsManagement(string $html): void
+    public final function listOfUserRightsManagement(
+        string $html
+    ): void
     {
 
         $userGroup = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
@@ -177,7 +181,9 @@ final class setting extends MainSwitchers
      * @param string $html
      * @return void
      */
-    public final function managementOfUserAccessRights(string $html): void
+    public final function managementOfUserAccessRights(
+        string $html
+    ): void
     {
 
         if (static::isValidMethod(true)) {
@@ -214,13 +220,15 @@ final class setting extends MainSwitchers
      * @param string $html
      * @return void
      */
-    public final function listOfRecentActions(string $html): void
+    public final function listOfRecentActions(
+        string $html
+    ): void
     {
 
         $total = 0;
         $list = [];
         $numLine = 100;
-        $page = static::isGet('_p', 'int') ? static::getGet('_p') : 1;
+        $currentPage = static::isGet('_p', 'int') ? static::getGet('_p') : 1;
         $position = static::notEmpty(['filtre'] , 'GET') ? static::getGet('filtre') : NULL;
 
         if (static::isGet('submitsearch') && static::notEmpty(['datasearch'] , 'GET')) {
@@ -230,12 +238,12 @@ final class setting extends MainSwitchers
         } else {
 
             $total = $this->count->countUsersRecentActions();
-            $list = $this->select->listOfRecentActions($page, $numLine);
+            $list = $this->select->listOfRecentActions($currentPage, $numLine);
         }
 
         $this->views( $html, 
             [
-                'current' => $page,
+                'current' => $currentPage,
                 'total' => $total,
                 'liste_users' => $list,
                 'reponse' => $this->ans,

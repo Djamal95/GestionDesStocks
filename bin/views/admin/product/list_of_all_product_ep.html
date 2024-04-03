@@ -61,7 +61,7 @@ import filter_search , loader, checkbox_field, actions_field, select_field %}{% 
                     <td style="width: 15%" id="tablecontent">
                         <button type="btn" name="__edit__" rel="tooltip" class="btn btn-success btn-just-icon btn-sm">
                             <a style="text-decoration:none;"
-                                href="{{ __pathId( 'product@update_product' , { '_see': select.idproduct|e }) }}"><i
+                                href="{{ __pathId( 'product@update_product' , { '_product': select.idproduct|e }) }}"><i
                                     class="icofont-key"></i> Edit Product</a>
                         </button>
                     </td>

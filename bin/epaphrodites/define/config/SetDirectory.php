@@ -7,10 +7,13 @@
 // Config language
 define('_LANG_', 'eng');
 
+// Python version in use
+define('__PYTHON__', 'python3');
+
 // Config front files
 define('_FRONT_', '.html');
 
-// Config API token Key name for POST or GET
+// Config API token Key name
 define('_KEYGEN_', 'CRSF');
 
 // Main directory folder
@@ -35,7 +38,7 @@ define('_CRSF_TOKEN_', 'crsf_token');
 define('_DIR_VIEWS_', 'bin/views');
 
 // Media files
-define('_DIR_MEDIA_', 'static/img/');
+define('_DIR_MEDIA_', 'static/docs/');
 
 // Main directory
 define('_ROOT_', dirname(__DIR__));
