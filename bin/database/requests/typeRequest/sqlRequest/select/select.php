@@ -197,8 +197,7 @@ class select extends SelectSelect
     public function findStockById(int $idstock): array
     {
         $result = $this->table('stock')
-            ->join(['product|idproductstock=idproduct'])
-            ->join(['fournisseur|idfournisseurstock=idfournisseur'])
+            ->join(['product|idproductstock=idproduct','fournisseur|idfournisseurstock=idfournisseur'])
             ->where('idstock')
             ->param([$idstock])
             ->sdb(3)

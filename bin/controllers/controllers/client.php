@@ -66,7 +66,7 @@ final class client extends MainSwitchers
                 $this->ans = $this->msg->answers("succes");
             }else{
                 $this->alert = "alert-danger";
-                //$this->ans = $this->msg->answers("echec");
+                $this->ans = $this->msg->answers("error");
             }
         }
         $this->views($html, [
@@ -91,6 +91,9 @@ final class client extends MainSwitchers
                 if($result == true){
                     $this->alert = "alert-success";
                     $this->ans = $this->msg->answers("succes");
+                }else{
+                    $this->alert = "alert-danger";
+                    $this->ans = $this->msg->answers("error");
                 }
             }
         }
@@ -110,10 +113,27 @@ final class client extends MainSwitchers
      */
     public final function updateClient(string $html): void
     {
+        if (static::isValidMethod(true) && static::arrayNoEmpty(['__name__', '__surname__', '__email__', '__password__'])) {
+            $result = $this->insert->addClient(
+                static::getPost('__name__'),
+                static::getPost('__surname__'),
+                static::getPost('__email__'),
+                static::getPost('__password__'),
+            );
+            if ($result) {
+                $this->alert = "alert-success";
+                $this->ans = $this->msg->answers("succes");
+            }else{
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers("error");
+            }
+        }
         $idclient = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
         $Client = $this->select->findClientById($idclient);
         $this->views($html, [
-            'client' => $Client
+            'client' => $Client,
+            'alert' => $this->alert,
+            'reponse' => $this->ans
         ], true);
     }
 }

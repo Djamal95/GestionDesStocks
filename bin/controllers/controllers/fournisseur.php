@@ -65,6 +65,9 @@ final class fournisseur extends MainSwitchers
             if ($result) {
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
+            }else{
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers("error");
             }
         }
 
@@ -92,6 +95,9 @@ final class fournisseur extends MainSwitchers
                 if ($result == true) {
                     $this->alert = "alert-success";
                     $this->ans = $this->msg->answers("succes");
+                }else{
+                    $this->alert = "alert-danger";
+                    $this->ans = $this->msg->answers("error");
                 }
             }
         }
@@ -113,10 +119,30 @@ final class fournisseur extends MainSwitchers
     public final function updateFournisseur(string $html): void
     {
 
+        if (static::isValidMethod(true) && static::arrayNoEmpty(['__name__', '__surname__', '__email__', '__contact__', '__entreprise__'])) {
+            $result = $this->insert->addSupplier(
+                static::getPost('__name__'),
+                static::getPost('__surname__'),
+                static::getPost('__email__'),
+                static::getPost('__contact__'),
+                static::getPost('__entreprise__'),
+            );
+            if ($result) {
+                $this->alert = "alert-success";
+                $this->ans = $this->msg->answers("succes");
+            }else{
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers("error");
+            }
+        }
         $idfournisseur = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
+        $listEntreprise = $this->select->listOfAllEntreprise();
         $supplier = $this->select->findSupplierById($idfournisseur);
         $this->views($html, [
             'supplier' => $supplier,
+            'entreprise' => $listEntreprise,
+            'alert' => $this->alert,
+            'reponse' => $this->ans
         ], true);
     }
 }
