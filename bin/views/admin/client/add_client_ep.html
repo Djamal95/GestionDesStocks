@@ -1,0 +1,65 @@
+{% extends layouts %}{% from breadcrumb import breadcrumb_field %} {% from breadcrumb import breadcrumb_field %} {% from message import alert_msg %}{% from forms
+import input_field, import_field, select_field , loader ,submit %}{% block content %}{{ breadcrumb_field( 'ADD CLIENT','client@list_of_all_client', 'CLIENT LIST' )}}
+<div class='container-fluid'>
+    {{ alert_msg(reponse, alert)}}
+    <form class="laodForm" method="post" novalidate>
+        <div class="row g-3">
+            {{ loader() }}{{ __csrf() }}
+            {{ input_field(
+            {
+            maxlength : 50 ,
+            require : true ,
+            character : "string",
+            name : '__name__' ,
+            label : 'Client name' ,
+            feedback : 'Please enter name .' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 300 ,
+            require : true ,
+            character : "string",
+            name : '__surname__' ,
+            label : 'Client surname' ,
+            feedback : 'Please enter surname.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 255 ,
+            require : true ,
+            name : '__email__' ,
+            label : 'Client email' ,
+            type : 'email',
+            feedback : 'Please enter your email.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 10 ,
+            require : true ,
+            name : '__password__' ,
+            label : 'Password' ,
+            type : 'password',
+            feedback : 'Please enter password.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 10 ,
+            require : true ,
+            name : '__passwordConf__' ,
+            label : 'Confirm your paasword' ,
+            type : 'password',
+            feedback : 'Please password must be same.' ,
+            }
+            )}}
+            {{ submit({
+            label : 'Save your informations',
+            icon : 'bi bi-pen'
+            }) }}
+        </div>
+    </form>
+</div>
+{% endblock %}

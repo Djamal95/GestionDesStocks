@@ -209,4 +209,28 @@ class update extends UpdateUpdate
             return false;
         }
     }
+
+        /**
+     * Request to save informations of one product in database
+     * @param string $name
+     * @param string $description
+     * @param string $quantity
+     * @param int $price
+     * @param int $category
+     * @param string $source
+     * @param int $idProduct
+     * @return bool
+     * 
+     */
+    public function updateProduct(string $name, string $description, string $quantity, string $price, string $category, string $source, int $idProduct): bool
+    {
+
+        $this->table('product')
+            ->set(['libelleProduct', 'descriptionProduct', 'quantityProduct', 'priceProduct', 'idCategoryProduct', 'imageProduct'])
+            ->where('idproduct')
+            ->param([$name, $description, $quantity, $price, $category, $source, $idProduct])
+            ->UQuery();
+
+        return true;
+    }
 }

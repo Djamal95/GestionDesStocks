@@ -1,0 +1,66 @@
+{% extends layouts %} {% from breadcrumb import breadcrumb_field %}{% from message import alert_msg %}{% from forms
+import input_field, select_field, import_field, loader , submit %} {% block content %}
+{{ alert_msg( reponse , alert ) }}{{ breadcrumb_field( 'UPDATE SUPPLIER','fournisseur@list_of_all_fournisseur','SUPPLIER LIST' )}}
+<div class='container-fluid'>
+    <form class="laodForm" method="post" novalidate>
+        <div class="row g-3">
+            {% for supplier in supplier %}
+            {{ input_field(
+            {
+            maxlength : 50 ,
+            require : true ,
+            character : "string",
+            name : '__name__' ,
+            label : 'Supplier name' ,
+            value : supplier.nameFourni,
+            feedback : 'Please enter name.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 300 ,
+            require : true ,
+            character : "string",
+            name : '__surname__' ,
+            label : 'Supplier surname' ,
+            value : supplier.surnameFourni,
+            feedback : 'Please enter surname.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 9 ,
+            require : true ,
+            type : 'email',
+            name : '__email__' ,
+            label : 'Supplier email' ,
+            value : supplier.emailFourni,
+            feedback : 'Please enter your email.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 9 ,
+            require : true ,
+            character : "numeric",
+            name : '__contact__' ,
+            label : 'Supplier contact' ,
+            value : supplier.contactFourni,
+            feedback : 'Please enter contact..' ,
+            }
+            )}}
+            {% endfor %}
+            {{ select_field({
+            label:"Entreprise",
+            name : "_entreprise_",
+            value : supplier.nameEntreprise,
+            require : true })
+            }}
+            {{ submit({
+            label : 'Save your informations',
+            icon : 'bi bi-pen'
+            }) }}
+        </div>
+    </form>
+</div>
+{% endblock %}

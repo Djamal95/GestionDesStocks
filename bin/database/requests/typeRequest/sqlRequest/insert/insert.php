@@ -2,6 +2,7 @@
 
 namespace Epaphrodites\database\requests\typeRequest\sqlRequest\insert;
 
+use DateTime;
 use Epaphrodites\database\requests\typeRequest\noSqlRequest\insert\insert as InsertInsert;
 
 class insert extends InsertInsert
@@ -16,11 +17,10 @@ class insert extends InsertInsert
      * @return bool
      */
     public function sqlConsoleAddUsers(
-        ?string $login = null, 
-        ?string $password = null, 
+        ?string $login = null,
+        ?string $password = null,
         ?int $UserGroup = null
-    ):bool
-    {
+    ): bool {
 
         $UserGroup = $UserGroup !== NULL ? $UserGroup : 1;
 
@@ -48,12 +48,11 @@ class insert extends InsertInsert
      * @return bool
      */
     public function addUserChats(
-        ?string $emitter = null, 
-        ?string $recipient = null, 
-        ?int $type = null, 
+        ?string $emitter = null,
+        ?string $recipient = null,
+        ?int $type = null,
         ?string $content = null
-    ):bool
-    {
+    ): bool {
 
         if (!empty($content) && !empty($recipient)) {
 
@@ -77,10 +76,9 @@ class insert extends InsertInsert
      * @return bool
      */
     public function sqlAddUsers(
-        ?string $login = null, 
+        ?string $login = null,
         ?int $usersgroup = null
-    ):bool
-    {
+    ): bool {
 
         if (!empty($login) && !empty($usersgroup) && count(static::initQuery()['getid']->sqlGetUsersDatas($login)) < 1) {
 
@@ -97,8 +95,124 @@ class insert extends InsertInsert
         } else {
             return false;
         }
-    }   
-    public function addProduct(string $label){
-        var_dump($label);die;
+    }
+
+    /**
+     * Request to save informations of one product in database
+     * @param string $name
+     * @param string $description
+     * @param string $quantity
+     * @param string $price
+     * @param string $category
+     * @param string $source
+     * @return string
+     * 
+     */
+    public function addProduct(string $name, string $description, string $quantity, string $price, string $category, string $source): string
+    {
+        $result = $this->table("product")
+            ->insert("libelleProduct, descriptionProduct, quantityProduct, priceProduct, idCategoryProduct, imageProduct")
+            ->values('?,?,?,?,?,?')
+            ->sdb(3)
+            ->param([$name, $description, $quantity, $price, $category, $source])
+            ->IQuery();
+        return $result;
+    }
+    /**
+     * Request to insert informations of one category
+     * @param string $nameCategory
+     * @return string
+     */
+    public function addCategory($nameCategory): string
+    {
+
+        $result = $this->table('category')
+            ->insert('nameCategory')
+            ->values('?')
+            ->sdb(3)
+            ->param([$nameCategory])
+            ->IQuery();
+
+        return $result;
+    }
+
+    /**
+     * Request ton insert informations of one supplier
+     * @param string $nameFournisseur
+     * @param string $surnameFournisseur
+     * @param string $emailFournisseur
+     * @param string $contactFournisseur
+     * @param string $idEntreprisefour
+     * @return string
+     */
+
+    public function addSupplier($nameFournisseur, $surnameFournisseur, $emailFournisseur, $contactFournisseur, $idEntreprisefour): string
+    {
+
+        $result = $this->table('fournisseur')
+            ->insert('nameFourni, surnameFourni,emailFourni, contactFourni, idEntreprisefour')
+            ->values('?, ?, ?, ?, ?')
+            ->param([$nameFournisseur, $surnameFournisseur, $emailFournisseur, $contactFournisseur, $idEntreprisefour])
+            ->sdb(3)
+            ->IQuery();
+        return $result;
+    }
+
+    /**
+     * Request ton insert all informations of one entreprise
+     * @param string $nameEntreprise 
+     * @param string $contactEntreprise
+     * @param string $emailEntreprise
+     * @return string
+     */
+
+    public function addEntreprise(string $nameEntreprise, string $contactEntreprise, string $emailEntreprise): string
+    {
+        $result = $this->table('entreprise')
+            ->insert('nameEntreprise, contactEntreprise, emailEntreprise')
+            ->values('?,?,?')
+            ->param([$nameEntreprise, $contactEntreprise, $emailEntreprise])
+            ->sdb(3)
+            ->IQuery();
+        return $result;
+    }
+
+    /**
+     * Request to insert all informations of one client
+     * @param string $nameClient
+     * @param string $surnameClient
+     * @param string $emailClient
+     * @param string $passwordClient
+     * @return string
+     */
+
+    public function addClient(string $nameClient, string $surnameClient, string $emailClient, string $passwordClient): string
+    {
+        $result = $this->table("client")
+            ->insert("nameClient, surnameClient, emailClient, passwordClient")
+            ->values('?,?,?,?')
+            ->sdb(3)
+            ->param([$nameClient, $surnameClient, $emailClient, $passwordClient])
+            ->IQuery();
+        return $result;
+    }
+
+    /**
+     * Method to register procurement
+     * @param string $dateApprovisionnement
+     * @param int  $idproductstock
+     * @param int $idfournisseurstock
+     * @param int $quantityProduct
+     * @return string
+     */
+    public function addStock(string $dateApprovisionnement, int $idproductstock, int $idfournisseurstock, int $quantityProduct):string{
+
+        $result = $this->table("stock")
+            ->insert("dateApprovisionnement,etatStock,idproductstock,idfournisseurstock,quantityProduct")
+            ->values("?,1,?,?,?")
+            ->param([$dateApprovisionnement,$idproductstock,$idfournisseurstock,$quantityProduct])
+            ->sdb(3)
+            ->IQuery();
+        return $result;
     }
 }

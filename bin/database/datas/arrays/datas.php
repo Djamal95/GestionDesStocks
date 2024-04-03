@@ -1,6 +1,7 @@
 <?php
 
 namespace Epaphrodites\database\datas\arrays;
+use Epaphrodites\controllers\controllers\product;
 
 class datas
 {
@@ -22,8 +23,16 @@ class datas
     
         return $key === null ? $list : ($list[$key] ?? 0);
     }
+    public function mainActions(
+        ?int $key = null
+    ): mixed
+    {
+        $list = [
+            1 => 'DELETE'
+        ];
     
-
+        return $key === null ? $list : ($list[$key] ?? 0);
+    }
     /**
      * Authorization actions
      * @param int $key

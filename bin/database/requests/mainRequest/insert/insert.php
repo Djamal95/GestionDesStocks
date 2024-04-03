@@ -72,4 +72,5 @@ final class insert extends InsertInsert
       default => $this->sqlConsoleAddUsers($login , $password, $UserGroup),
     };     
   }   
- }
+ 
+}

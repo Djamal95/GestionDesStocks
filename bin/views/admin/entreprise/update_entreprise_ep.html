@@ -1,0 +1,50 @@
+{% extends layouts %} {% from breadcrumb import breadcrumb_field %}{% from message import alert_msg %}{% from forms
+import input_field, select_field, import_field, loader , submit %} {% block content %}
+{{ alert_msg( reponse , alert ) }}{{ breadcrumb_field( 'UPDATE
+ENTREPRISE','entreprise@list_of_all_entreprise','ENTREPRISE LIST' )}}
+<div class='container-fluid'>
+    <form class="laodForm" method="post" novalidate>
+        <div class="row g-3">
+            {% for entreprise in entreprise %}
+            {{ input_field(
+            {
+            maxlength : 100 ,
+            require : true ,
+            character : "string",
+            name : '__name__' ,
+            label : 'Entreprise name' ,
+            value : entreprise.nameEntreprise,
+            feedback : 'Please enter the name of entreprise.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 10 ,
+            require : true ,
+            character : "numeric",
+            name : '__contact__' ,
+            label : 'Contact' ,
+            value : entreprise.contactEntreprise,
+            feedback : 'Please enter the description.' ,
+            }
+            )}}
+            {{ input_field(
+            {
+            maxlength : 255 ,
+            require : true ,
+            name : '__email__' ,
+            label : 'Entreprise Email' ,
+            type : 'email',
+            value : entreprise.emailEntreprise,
+            feedback : 'Please enter quantity.' ,
+            }
+            )}}
+            {% endfor %}
+            {{ submit({
+            label : 'Save your informations',
+            icon : 'bi bi-pen'
+            }) }}
+        </div>
+    </form>
+</div>
+{% endblock %}

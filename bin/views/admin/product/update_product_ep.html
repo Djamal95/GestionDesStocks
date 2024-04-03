@@ -1,10 +1,10 @@
-{% extends layouts %}{% from breadcrumb import breadcrumb_field %} {% from breadcrumb import breadcrumb_field %} {% from message import alert_msg %}{% from forms
-import input_field, import_field, select_field , loader ,submit %}{% block content %}{{ breadcrumb_field( 'ADD PRODUCT','product@list_of_all_product', 'PRODUCT LIST' )}} {{ alert_msg( reponse , alert ) }}
+{% extends layouts %} {% from breadcrumb import breadcrumb_field %}{% from message import alert_msg %}{% from forms
+import input_field, select_field, import_field, loader , submit %} {% block content %}
+{{ alert_msg( reponse , alert ) }}{{ breadcrumb_field( 'UPDATE PRODUCT','product@list_of_all_product','PRODUCT LIST' )}}
 <div class='container-fluid'>
-    {{ alert_msg(answers, alert)}}
-    <form class="laodForm" method="post" novalidate enctype="multipart/form-data">
+    <form class="laodForm" method="post" novalidate>
         <div class="row g-3">
-            {{ loader() }}{{ __csrf() }}
+            {% for product in product %}
             {{ input_field(
             {
             maxlength : 50 ,
@@ -12,6 +12,7 @@ import input_field, import_field, select_field , loader ,submit %}{% block conte
             character : "string",
             name : '__name__' ,
             label : 'Product name' ,
+            value : product.libelleProduct,
             feedback : 'Please enter the name of product.' ,
             }
             )}}
@@ -22,6 +23,7 @@ import input_field, import_field, select_field , loader ,submit %}{% block conte
             character : "string",
             name : '__description__' ,
             label : 'Description' ,
+            value : product.descriptionProduct,
             feedback : 'Please enter the description.' ,
             }
             )}}
@@ -32,6 +34,7 @@ import input_field, import_field, select_field , loader ,submit %}{% block conte
             character : "numeric",
             name : '__quantity__' ,
             label : 'Quantity' ,
+            value : product.quantityProduct,
             feedback : 'Please enter quantity.' ,
             }
             )}}
@@ -42,17 +45,20 @@ import input_field, import_field, select_field , loader ,submit %}{% block conte
             character : "numeric",
             name : '__price__' ,
             label : 'Price' ,
+            value : product.priceProduct,
             feedback : 'Please enter price.' ,
             }
             )}}
             {{ select_field({
                 label:"Category Product",
                 name : "__Category__",
-                datas : select,
+                datas : listCategory,
                 value : 'idcategory',
                 selected : 'nameCategory',
+                position : product.idCategoryProduct,
                 require : true })
             }}
+            {% endfor %}
             {{ import_field({
                 name : 'image', 
                 id : 'image' , 

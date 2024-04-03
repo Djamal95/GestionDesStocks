@@ -173,15 +173,17 @@
 					<ul id="robot-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
 						<li>
 							<a href="{{ __path("chats@start_epaphrodites_chatbots") }}">
-								<i class="bi bi-circle"></i>
-								<span>Start Epaphrodites</span>
-							</a>
+								<i class="bi bi-circle"></i><span>Start bot model one</span>
+							</a> 
+							<a href="{{ __path("chats@start_heredia_bot") }}">
+								<i class="bi bi-circle"></i><span>Start modele model two</span>
+							</a>                                                                      
 						</li>
 					</ul>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link collapsed" data-bs-target="#product-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-robot"></i>
+						<i class="bi bi-bag-check"></i>
 						<span>Product management</span>
 						<i class="bi bi-chevron-down ms-auto"></i>
 					</a>
@@ -191,188 +193,286 @@
 								<i class="bi bi-circle"></i>
 								<span>Add product</span>
 							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#gestprint-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-printer"></i>
-						<span>Print management</span>
-						<i class="bi bi-chevron-down ms-auto"></i>
-					</a>
-					<ul id="gestprint-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-						<li>
-							<a href="#">
+							<a href="{{ __path("product@list_of_all_product") }}">
 								<i class="bi bi-circle"></i>
-								<span>Print documents</span>
+								<span>All Product list</span>
 							</a>
 						</li>
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#gestexport-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-download"></i>
-						<span>Export management</span>
+					<a class="nav-link collapsed" data-bs-target="#category-nav" data-bs-toggle="collapse" href="#">
+						<i class="bi bi-box-seam"></i>
+						<span>category management</span>
 						<i class="bi bi-chevron-down ms-auto"></i>
 					</a>
-					<ul id="gestexport-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<ul id="category-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
 						<li>
-							<a href="#">
+							<a href="{{ __path("category@add_category") }}">
 								<i class="bi bi-circle"></i>
-								<span>Export files</span>
+								<span>Add category</span>
+							</a>
+							<a href="{{ __path("category@list_of_all_category") }}">
+								<i class="bi bi-circle"></i>
+								<span>All Category list</span>
 							</a>
 						</li>
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#gestimport-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-upload"></i>
-						<span>Import management</span>
+					<a class="nav-link collapsed" data-bs-target="#stock-nav" data-bs-toggle="collapse" href="#">
+						<i class="bi bi-box-seam"></i>
+						<span>stock management</span>
 						<i class="bi bi-chevron-down ms-auto"></i>
 					</a>
-					<ul id="gestimport-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<ul id="stock-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
 						<li>
-							<a href="{{ __path('users@import_users') }}">
+							<a href="{{ __path("stock@add_stock") }}">
 								<i class="bi bi-circle"></i>
-								<span>Import users</span>
+								<span>Procurement</span>
+							</a>
+							<a href="{{ __path("stock@list_of_stock") }}">
+								<i class="bi bi-circle"></i>
+								<span>All Procurement list</span>
 							</a>
 						</li>
 					</ul>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#geststatistiques-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-graph-up-arrow"></i>
-						<span>Statistics management</span>
+					<a class="nav-link collapsed" data-bs-target="#client-nav" data-bs-toggle="collapse" href="#">
+						<i class="bi bi-box-seam"></i>
+						<span>Client management</span>
 						<i class="bi bi-chevron-down ms-auto"></i>
 					</a>
-					<ul id="geststatistiques-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<ul id="client-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
 						<li>
-							<a href="#">
+							<a href="{{ __path("client@add_client") }}">
 								<i class="bi bi-circle"></i>
-								<span>Users statistics</span>
+								<span>Add Client</span>
+							</a>
+							<a href="{{ __path("client@list_of_all_client") }}">
+								<i class="bi bi-circle"></i>
+								<span>All Client list</span>
 							</a>
 						</li>
 					</ul>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#gestannuaire-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-journal-bookmark"></i>
-						<span>Directory management</span>
-						<i class="bi bi-chevron-down ms-auto"></i>
-					</a>
-					<ul id="gestannuaire-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-						<li>
-							<a href="#">
-								<i class="bi bi-circle"></i>
-								<span>Directory list</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#messenger-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-chat-left-text"></i>
-						<span>Messenger service</span>
-						<i class="bi bi-chevron-down ms-auto"></i>
-					</a>
-					<ul id="messenger-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-						<li>
-							<a href="{{ __path("chats@list_of_messages") }}">
-								<i class="bi bi-circle"></i>
-								<span>List of messages</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#gestusers-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-people"></i>
-						<span>Users management</span>
-						<i class="bi bi-chevron-down ms-auto"></i>
-					</a>
-					<ul id="gestusers-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-						<li>
-							<a href="{{ __path('users@all_users_list') }}">
-								<i class="bi bi-circle"></i>
-								<span>All users list</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#usersright-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-lock"></i>
-						<span>Right management</span>
-						<i class="bi bi-chevron-down ms-auto"></i>
-					</a>
-					<ul id="usersright-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-						<li>
-							<a href="{{ __path('setting@management_of_user_access_rights') }}">
-								<i class="bi bi-circle"></i>
-								<span>Users rights list</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#setting-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-gear"></i>
-						<span>System settings</span>
-						<i class="bi bi-chevron-down ms-auto"></i>
-					</a>
-					<ul id="setting-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-						<li>
-							<a href="#">
-								<i class="bi bi-circle"></i>
-								<span>Authors</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link collapsed" data-bs-target="#actionrecente-nav" data-bs-toggle="collapse" href="#">
-						<i class="bi bi-journal-text"></i>
-						<span>Actions management</span>
-						<i class="bi bi-chevron-down ms-auto"></i>
-					</a>
-					<ul id="actionrecente-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-						<li>
-							<a href="{{ __path("setting@list_of_recent_actions") }}">
-								<i class="bi bi-circle"></i>
-								<span>List of recent actions</span>
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " target="_blank" href="https://epaphrodite.slack.com/">
-						<i class="bi bi-slack"></i>
-						<span>Epaphrodites Slack</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link " target="_blank" href="https://github.com/epaphrodites/epaphrodites">
-						<i class="bi bi-github"></i>
-						<span>Epaphrodites GitHub</span>
-					</a>
-				</li>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#entreprise-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-box-seam"></i>
+					<span>Entreprise management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="entreprise-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="{{ __path("entreprise@add_entreprise") }}">
+							<i class="bi bi-circle"></i>
+							<span>Add Entreprise</span>
+						</a>
+						<a href="{{ __path("entreprise@list_of_all_entreprise") }}">
+							<i class="bi bi-circle"></i>
+							<span>All Entreprise list</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#supplier-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-box-seam"></i>
+					<span>Supplier management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="supplier-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="{{ __path("fournisseur@add_fournisseur") }}">
+							<i class="bi bi-circle"></i>
+							<span>Add Supplier</span>
+						</a>
+						<a href="{{ __path("fournisseur@list_of_all_fournisseur") }}">
+							<i class="bi bi-circle"></i>
+							<span>All Supplier list</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#gestprint-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-printer"></i>
+					<span>Print management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="gestprint-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="#">
+							<i class="bi bi-circle"></i>
+							<span>Print documents</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#gestexport-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-download"></i>
+					<span>Export management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="gestexport-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="#">
+							<i class="bi bi-circle"></i>
+							<span>Export files</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#gestimport-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-upload"></i>
+					<span>Import management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="gestimport-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="{{ __path('users@import_users') }}">
+							<i class="bi bi-circle"></i>
+							<span>Import users</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#geststatistiques-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-graph-up-arrow"></i>
+					<span>Statistics management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="geststatistiques-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="#">
+							<i class="bi bi-circle"></i>
+							<span>Users statistics</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#gestannuaire-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-journal-bookmark"></i>
+					<span>Directory management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="gestannuaire-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="#">
+							<i class="bi bi-circle"></i>
+							<span>Directory list</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#messenger-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-chat-left-text"></i>
+					<span>Messenger service</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="messenger-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="{{ __path("chats@list_of_messages") }}">
+							<i class="bi bi-circle"></i>
+							<span>List of messages</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#gestusers-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-people"></i>
+					<span>Users management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="gestusers-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="{{ __path('users@all_users_list') }}">
+							<i class="bi bi-circle"></i>
+							<span>All users list</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#usersright-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-lock"></i>
+					<span>Right management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="usersright-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="{{ __path('setting@management_of_user_access_rights') }}">
+							<i class="bi bi-circle"></i>
+							<span>Users rights list</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#setting-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-gear"></i>
+					<span>System settings</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="setting-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="#">
+							<i class="bi bi-circle"></i>
+							<span>Authors</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-bs-target="#actionrecente-nav" data-bs-toggle="collapse" href="#">
+					<i class="bi bi-journal-text"></i>
+					<span>Actions management</span>
+					<i class="bi bi-chevron-down ms-auto"></i>
+				</a>
+				<ul id="actionrecente-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+					<li>
+						<a href="{{ __path("setting@list_of_recent_actions") }}">
+							<i class="bi bi-circle"></i>
+							<span>List of recent actions</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link " target="_blank" href="https://epaphrodite.slack.com/">
+					<i class="bi bi-slack"></i>
+					<span>Epaphrodites Slack</span>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link " target="_blank" href="https://github.com/epaphrodites/epaphrodites">
+					<i class="bi bi-github"></i>
+					<span>Epaphrodites GitHub</span>
+				</a>
+			</li>
 
-			</ul>
-		</aside>
-		<!-- End Sidebar-->
-
-		<main id="main" class="main"> {% block content %}{% endblock %}
-			</main>
-			<div class="loader">
-				<div class="tools_loader" id="loader-1"></div>
-			</div>
-			<script src="{{ __js('jquery/jquery.default.main') }}"></script>
-			<script src="{{ __js('jquery/jquery') }}"></script>
-			<script src="{{ __js('bootstrap/4.1/bootstrap.bundle.min') }}"></script>
-			<script src="{{ __js('bootstrap/4.1/bootstrap.min') }}"></script>
-			<script src="{{ __js('bootstrap/aos') }}"></script>
-			<script>
-				jQuery(function ($) {
+		</ul>
+	</body>
+</html></aside><!-- End Sidebar--><main id="main" class="main"> {% block content %}{% endblock %}
+</main>
+<div class="loader">
+	<div class="tools_loader" id="loader-1"></div>
+</div>
+<script src="{{ __js('jquery/jquery.default.main') }}"></script>
+<script src="{{ __js('jquery/jquery') }}"></script>
+<script src="{{ __js('bootstrap/4.1/bootstrap.bundle.min') }}"></script>
+<script src="{{ __js('bootstrap/4.1/bootstrap.min') }}"></script>
+<script src="{{ __js('bootstrap/aos') }}"></script>
+<script>
+	jQuery(function ($) {
 $(".sidebar-dropdown > a").click(function () {
 $(".sidebar-submenu").slideUp(300);
 if ($(this).parent().hasClass("active")) {
@@ -391,29 +491,27 @@ $("#show-sidebar").click(function () {
 $(".page-wrapper").addClass("toggled");
 });
 });
-			</script>
-			<script>
-				jQuery(window).load(function () {
+</script>
+<script>
+	jQuery(window).load(function () {
 jQuery(".loader").fadeOut("200");
 });
-			</script>
-			<script>
-				$(".loaderpage").hide();
-			</script>
-			<script type="text/javascript">
-				$(document).ready(function () {
+</script>
+<script>
+	$(".loaderpage").hide();
+</script>
+<script type="text/javascript">
+	$(document).ready(function () {
 $('#datasform').submit(function () {
 $('#loaderdatas').show();
 return true;
 });
 });
-			</script>
-			<script src="{{ __js('datatable/jquery.dataTables.min') }}"></script>
-			<script src="{{ __js('datatable/dataTables.bootstrap4.min') }}"></script>
-			<script src="{{ __js('datatable/dataTables.buttons.min')}}"></script>
-			<script src="{{ __js('datatable/buttons.html5.min')}}"></script>
-			<script src="{{ __js('datatable/jszip.min')}}"></script>
-			<script src="{{ __js('datatable/pdfmake.min')}}"></script>
-			<script src="{{ __js('datatable/vfs_fonts')}}"></script>
-		</body>
-	</html>
+</script>
+<script src="{{ __js('datatable/jquery.dataTables.min') }}"></script>
+<script src="{{ __js('datatable/dataTables.bootstrap4.min') }}"></script>
+<script src="{{ __js('datatable/dataTables.buttons.min')}}"></script>
+<script src="{{ __js('datatable/buttons.html5.min')}}"></script>
+<script src="{{ __js('datatable/jszip.min')}}"></script>
+<script src="{{ __js('datatable/pdfmake.min')}}"></script>
+<script src="{{ __js('datatable/vfs_fonts')}}"></script></body></html>
