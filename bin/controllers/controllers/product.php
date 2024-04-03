@@ -88,7 +88,7 @@ final class product extends MainSwitchers
         $listProduct = $this->select->findProductById($idProduct);
 
         if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__quantity__','__price__','__Category__'])){
-            $source = $_FILES['image']['name'];
+            $source = static::getFileName('image');
             
             $result = $this->update->updateProduct(
                 $idProduct,
@@ -100,7 +100,7 @@ final class product extends MainSwitchers
                 $source
             );
             if($result){
-                $this->env->UplaodFiles([_DIR_MEDIA_],[$source]);
+                $this->env->uplaodFiles([_DIR_MEDIA_ => 'image']);
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
             }else{

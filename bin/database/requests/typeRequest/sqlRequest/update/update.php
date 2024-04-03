@@ -179,7 +179,6 @@ class update extends UpdateUpdate
     ): mixed {
 
         if (static::initNamespace()['verify']->onlyNumber($number, 11) === false) {
-
             $this->table('useraccount')
                 ->set(['contactusers', 'emailusers', 'usersname', 'usersstat'])
                 ->where('idusers')
@@ -228,6 +227,7 @@ class update extends UpdateUpdate
         $result = $this->table('product')
             ->set(['libelleProduct,descriptionProduct,quantityProduct,priceProduct,idCategogryProduct,imageProduct'])
             ->where('idproduct')
+            ->sdb(3)
             ->param([$libelleProduct, $descriptionProduct, $quantityProduct, $priceProduct, $idCategoryProduct, $image, $idproduct])
             ->UQuery();
         return true;
@@ -243,13 +243,13 @@ class update extends UpdateUpdate
         int $idcategory,
         string $nameCategory,
     ): bool {
-        var_dump($idcategory);die;
+        
         $result = $this->table('category')
             ->set(['nameCategory'])
             ->where('idcategory')
+            ->sdb(3)
             ->param([$nameCategory, $idcategory])
             ->UQuery();
-
         return $result;
     }
     /**
@@ -272,6 +272,7 @@ class update extends UpdateUpdate
         $result = $this->table('client')
             ->set(['nameClient,surnameClient,emailClient,passwordClient'])
             ->where('idclient')
+            ->sdb(3)
             ->param([$nameClient,$surnameClient,$emailClient,$passwordClient, $idclient])
             ->UQuery();
         return $result;
@@ -295,6 +296,7 @@ class update extends UpdateUpdate
         $result = $this->table('entreprise')
             ->set(['nameEntreprise,contactEntreprise,emailEntreprise'])
             ->where('identreprise')
+            ->sdb(3)
             ->param([$nameEntreprise,$contactEntreprise,$emailEntreprise, $identreprise])
             ->UQuery();
         return $result;
@@ -321,6 +323,7 @@ class update extends UpdateUpdate
         $result = $this->table('fournisseur')
             ->set(['nameFourni,surnameFourni,emailFourni,contactFourni,idEntreprisefour'])
             ->where('idfournisseur')
+            ->sdb(3)
             ->param([$nameFourni,$surnameFourni,$emailFourni, $contactFourni,$idEntreprisefour,$idfournisseur])
             ->UQuery();
         return $result;
@@ -345,6 +348,7 @@ class update extends UpdateUpdate
         $result = $this->table('stock')
             ->set(['dateApprovisionnement,idproductstock,idfournisseurstock,quantityProduct'])
             ->where('idstock')
+            ->sdb(3)
             ->param([$dateApprovisionnement,$idproductstock,$idfournisseurstock, $quantityProduct,$idstock])
             ->UQuery();
         return $result;
