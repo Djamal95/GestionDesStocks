@@ -49,8 +49,6 @@ final class product extends MainSwitchers
             
             $source = static::getFileName('image');
 
-            $this->env->uploadFiles([_DIR_IMG_, 'image']);
-
             $result = $this->insert->addProduct(
                 static::getPost('__name__'),
                 static::getPost('__description__'),
@@ -60,8 +58,7 @@ final class product extends MainSwitchers
                 $source
             );
             if($result){
-                
-               
+                $this->env->uploadFiles([_DIR_IMG_, 'image']);
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
             }
@@ -73,7 +70,6 @@ final class product extends MainSwitchers
             'answers' => $this->ans
         ], true );
     }
-
 
     /**
     * start view function
@@ -91,8 +87,6 @@ final class product extends MainSwitchers
 
             $source = static::getFileName('image');
 
-           var_dump($source);die;
-
             $result = $this->update->updateProduct(
                         static::getPost('__name__'),
                         static::getPost('__description__'),
@@ -105,7 +99,7 @@ final class product extends MainSwitchers
 
             if($result){
                 
-                $this->env->uploadFiles([_DIR_MEDIA_, 'image']);
+                $this->env->uploadFiles([_DIR_MEDIA_ => 'image']);
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
             }
