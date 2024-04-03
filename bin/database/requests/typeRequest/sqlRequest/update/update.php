@@ -239,16 +239,17 @@ class update extends UpdateUpdate
      * @param string $nameCategory
      * @return bool
      */
-
     public function updateCategory(
         int $idcategory,
         string $nameCategory,
     ): bool {
+        var_dump($idcategory);die;
         $result = $this->table('category')
             ->set(['nameCategory'])
             ->where('idcategory')
             ->param([$nameCategory, $idcategory])
             ->UQuery();
+
         return $result;
     }
     /**
@@ -322,7 +323,6 @@ class update extends UpdateUpdate
             ->where('idfournisseur')
             ->param([$nameFourni,$surnameFourni,$emailFourni, $contactFourni,$idEntreprisefour,$idfournisseur])
             ->UQuery();
-            var_dump($result);die;
         return $result;
     }
     /**

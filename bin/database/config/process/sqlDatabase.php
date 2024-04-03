@@ -69,10 +69,9 @@ class sqlDatabase extends SwitchDatabase implements DatabaseRequest
     {
         $connection = $this->dbConnect($db);
         $connection->beginTransaction();
-
         try {
             $request = $connection->prepare($sqlChaine);
-
+            
             if ($param) {
                 foreach ($datas as $k => $v) {
                     $request->bindValue(is_int($k) ? $k + 1 : $k, $v, PDO::PARAM_STR);
@@ -86,12 +85,15 @@ class sqlDatabase extends SwitchDatabase implements DatabaseRequest
             }
 
            $connection->commit();
+
+           
             return $result;
             
         } catch (\Exception $e) {
-             if ($connection->inTransaction()) {
+            if ($connection->inTransaction()) {
                 $connection->rollBack();
             } 
+  
             return false;
         }
     }
