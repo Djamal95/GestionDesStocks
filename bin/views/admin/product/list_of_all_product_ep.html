@@ -41,7 +41,6 @@ import filter_search , loader, checkbox_field, actions_field, select_field %}{% 
                     <th>Nº</th>
                     <th>PRODUCT NAME</th>
                     <th>DESCRIPTION</th>
-                    <th>QUANTITY</th>
                     <th>PRICE</th>
                     <th>CATEGORY</th>
                     <th>ACTIONS</th>
@@ -55,10 +54,9 @@ import filter_search , loader, checkbox_field, actions_field, select_field %}{% 
                     <td class='nodre' style="width: 3%"></td>
                     <td style="width: 7%">{{ select.libelleProduct|e }}</td>
                     <td style="width: 20%">{{ select.descriptionProduct|e }}</td>
-                    <td style="width: 10%">{{ select.quantityProduct|e}}</td>
                     <td style="width: 10%">{{ select.priceProduct|e }}</td>
                     <td style="width: 10%">{{ select.nameCategory|e }}</td>
-                    <td style="width: 15%" id="tablecontent">
+                    <td style="width: 10%" id="tablecontent">
                         <button type="btn" name="__edit__" rel="tooltip" class="btn btn-success btn-just-icon btn-sm">
                             <a style="text-decoration:none;"
                                 href="{{ __pathId( 'product@update_product' , { '_product': select.idproduct|e }) }}"><i

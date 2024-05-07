@@ -2,7 +2,7 @@
 import input_field, select_field, import_field, loader , submit %} {% block content %}
 {{ alert_msg( reponse , alert ) }}{{ breadcrumb_field( 'UPDATE PRODUCT','product@list_of_all_product','PRODUCT LIST' )}}
 <div class='container-fluid'>
-    <form class="laodForm" method="post" novalidate>
+    <form class="laodForm" method="post" novalidate enctype="multipart/form-data">
         <div class="row g-3">
             {% for product in product %}
             {{ input_field(
@@ -25,17 +25,6 @@ import input_field, select_field, import_field, loader , submit %} {% block cont
             label : 'Description' ,
             value : product.descriptionProduct,
             feedback : 'Please enter the description.' ,
-            }
-            )}}
-            {{ input_field(
-            {
-            maxlength : 9 ,
-            require : true ,
-            character : "numeric",
-            name : '__quantity__' ,
-            label : 'Quantity' ,
-            value : product.quantityProduct,
-            feedback : 'Please enter quantity.' ,
             }
             )}}
             {{ input_field(

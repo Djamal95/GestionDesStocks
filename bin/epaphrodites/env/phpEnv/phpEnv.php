@@ -141,7 +141,6 @@ trait phpEnv{
             }
     
             $fulltargetPath = rtrim($targetPath, '/') . '/' . $safeFileName;
-    
             if (!move_uploaded_file($_FILES[$fileKey]['tmp_name'], $fulltargetPath)) {
                 $allUploaded = false;
             }

@@ -10,6 +10,7 @@ final class client extends MainSwitchers
     private object $insert;
     private object $select;
     private object $delete;
+    private object $update;
     private string $alert = '';
     private string $ans = '';
 
@@ -33,6 +34,7 @@ final class client extends MainSwitchers
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
         $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
+        $this->update = $this->getFunctionObject(static::initQuery(), 'update');
     }
 
     /**
@@ -113,12 +115,15 @@ final class client extends MainSwitchers
      */
     public final function updateClient(string $html): void
     {
+        $idclient = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
+
         if (static::isValidMethod(true) && static::arrayNoEmpty(['__name__', '__surname__', '__email__', '__password__'])) {
-            $result = $this->insert->addClient(
+            $result = $this->update->updateClient(
+                $idclient,
                 static::getPost('__name__'),
                 static::getPost('__surname__'),
                 static::getPost('__email__'),
-                static::getPost('__password__'),
+                static::getPost('__password__')
             );
             if ($result) {
                 $this->alert = "alert-success";
@@ -128,7 +133,6 @@ final class client extends MainSwitchers
                 $this->ans = $this->msg->answers("error");
             }
         }
-        $idclient = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
         $Client = $this->select->findClientById($idclient);
         $this->views($html, [
             'client' => $Client,

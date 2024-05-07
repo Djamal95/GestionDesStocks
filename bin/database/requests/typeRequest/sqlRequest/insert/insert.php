@@ -101,20 +101,19 @@ class insert extends InsertInsert
      * Request to save informations of one product in database
      * @param string $name
      * @param string $description
-     * @param string $quantity
      * @param string $price
      * @param string $category
      * @param string $source
      * @return string
      * 
      */
-    public function addProduct(string $name, string $description, string $quantity, string $price, string $category, string $source): string
+    public function addProduct(string $name, string $description, string $price, string $category, string $source): string
     {
         $result = $this->table("product")
-            ->insert("libelleProduct, descriptionProduct, quantityProduct, priceProduct, idCategoryProduct, imageProduct")
-            ->values('?,?,?,?,?,?')
+            ->insert("libelleProduct, descriptionProduct, priceProduct, idCategoryProduct, imageProduct")
+            ->values('?,?,?,?,?')
             ->sdb(3)
-            ->param([$name, $description, $quantity, $price, $category, $source])
+            ->param([$name, $description, $price, $category, $source])
             ->IQuery();
         return $result;
     }

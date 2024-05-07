@@ -14,7 +14,9 @@ use Epaphrodites\controllers\controllers\stock;
 use Epaphrodites\controllers\controllers\client;
 use Epaphrodites\controllers\controllers\entreprise;
 use Epaphrodites\controllers\controllers\fournisseur;
-use Epaphrodites\controllers\controllers\test;
+use Epaphrodites\controllers\controllers\compte;
+use Epaphrodites\controllers\controllers\commande;
+use Epaphrodites\controllers\controllers\home;
 
 trait controllerMap
 {
@@ -37,6 +39,9 @@ trait controllerMap
     private function controllerMap(): array
     {
         return [
+			'compte' => [ new compte, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
+			'commande' => [ new commande, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
+			'home' => [ new home, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
 			'client' => [ new client, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
 			'entreprise' => [ new entreprise, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],
 			'fournisseur' => [ new fournisseur, 'SwitchControllers', true , _DIR_ADMIN_TEMP_ ],

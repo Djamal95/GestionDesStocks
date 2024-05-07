@@ -213,7 +213,6 @@ class update extends UpdateUpdate
      * Request to save informations of one product in database
      * @param string $name
      * @param string $description
-     * @param string $quantity
      * @param int $price
      * @param int $category
      * @param string $source
@@ -221,16 +220,17 @@ class update extends UpdateUpdate
      * @return bool
      * 
      */
-    public function updateProduct(string $name, string $description, string $quantity, string $price, string $category, string $source, int $idProduct): bool
+    public function updateProduct(string $name, string $description, string $price, string $category, string $source, int $idProduct): bool
     {
 
-        $this->table('product')
-            ->set(['libelleProduct', 'descriptionProduct', 'quantityProduct', 'priceProduct', 'idCategoryProduct', 'imageProduct'])
+        $result = $this->table('product')
+            ->set(['libelleProduct', 'descriptionProduct', 'priceProduct', 'idCategoryProduct', 'imageProduct'])
             ->where('idproduct')
-            ->param([$name, $description, $quantity, $price, $category, $source, $idProduct])
+            ->sdb(3)
+            ->param([$name, $description, $price, $category, $source, $idProduct])
             ->UQuery();
 
-        return true;
+        return $result;
     }
     /**
      * Method to update informations of one category
@@ -269,14 +269,13 @@ class update extends UpdateUpdate
         string $passwordClient,
     ): bool {
         $result = $this->table('client')
-            ->set(['nameClient,surnameClient,emailClient,passwordClient'])
+            ->set(['nameClient','surnameClient','emailClient','passwordClient'])
             ->where('idclient')
             ->sdb(3)
             ->param([$nameClient,$surnameClient,$emailClient,$passwordClient, $idclient])
             ->UQuery();
         return $result;
     }
-
     /**
      * Method to update informatios of one entreprise
      * @param int $identreprise
@@ -285,7 +284,6 @@ class update extends UpdateUpdate
      * @param string $emailEntreprise
      * @return bool
      */
-
      public function updateEntreprise(
         int $identreprise,
         string $nameEntreprise,
@@ -293,7 +291,7 @@ class update extends UpdateUpdate
         string $emailEntreprise,
     ): bool {
         $result = $this->table('entreprise')
-            ->set(['nameEntreprise,contactEntreprise,emailEntreprise'])
+            ->set(['nameEntreprise','contactEntreprise','emailEntreprise'])
             ->where('identreprise')
             ->sdb(3)
             ->param([$nameEntreprise,$contactEntreprise,$emailEntreprise, $identreprise])
@@ -320,7 +318,7 @@ class update extends UpdateUpdate
         int $idEntreprisefour
     ): bool {
         $result = $this->table('fournisseur')
-            ->set(['nameFourni,surnameFourni,emailFourni,contactFourni,idEntreprisefour'])
+            ->set(['nameFourni','surnameFourni','emailFourni','contactFourni','idEntreprisefour'])
             ->where('idfournisseur')
             ->sdb(3)
             ->param([$nameFourni,$surnameFourni,$emailFourni, $contactFourni,$idEntreprisefour,$idfournisseur])
@@ -342,10 +340,10 @@ class update extends UpdateUpdate
         string $dateApprovisionnement,
         int $idproductstock,
         string $idfournisseurstock,
-        string $quantityProduct,
+        string $quantityProduct
     ): bool {
         $result = $this->table('stock')
-            ->set(['dateApprovisionnement,idproductstock,idfournisseurstock,quantityProduct'])
+            ->set(['dateApprovisionnement','idproductstock','idfournisseurstock','quantityProduct'])
             ->where('idstock')
             ->sdb(3)
             ->param([$dateApprovisionnement,$idproductstock,$idfournisseurstock, $quantityProduct,$idstock])

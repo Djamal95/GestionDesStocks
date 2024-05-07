@@ -9,6 +9,7 @@ final class stock extends MainSwitchers
     private object $select;
     private object $delete;
     private object $insert;
+    private object $update;
     private string $alert = "";
     private string $ans = "";
 
@@ -31,6 +32,7 @@ final class stock extends MainSwitchers
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
+        $this->update = $this->getFunctionObject(static::initQuery(), 'update');
     }            
 
     /**
@@ -59,7 +61,6 @@ final class stock extends MainSwitchers
         }
         
         $stockList = $this->select->listOfAllStock();
-
         $this->views($html, [
             'stock' => $stockList,
             'alert' => $this->alert,
@@ -115,15 +116,17 @@ final class stock extends MainSwitchers
      public final function updateStock(
         string $html
     ): void{
+        $idstock = static::isGet('_see','int')? static::getGet('_see'): 0;
+
         if (static::isValidMethod(true) && static::arrayNoEmpty(['__date__', '__product__', '__supplier__','__quantity__'])) {
            
-            $result = $this->insert->addStock(
+            $result = $this->update->updateStock(
+                $idstock,
                 static::getPost('__date__'),
                 static::getPost('__product__'),
                 static::getPost('__supplier__'),
-                static::getPost('__quantity__'),
+                static::getPost('__quantity__')
             );
-
             if ($result) {
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
@@ -132,11 +135,10 @@ final class stock extends MainSwitchers
                 $this->ans = $this->msg->answers("error");
             }
         }
-
-        $idstock = static::isGet('_see','int')? static::getGet('_see'): 0;
         $listProduct = $this->select->listOfAllProduct();
         $listSupplier = $this->select->listOfAllSupplier();
         $listStock = $this->select->findStockById($idstock);
+        //var_dump($listStock);die;
         $this->views( $html, [
             'stock' => $listStock,
             'product' => $listProduct,

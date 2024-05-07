@@ -9,20 +9,27 @@ class LayoutsConfig
      * Get login template
      * @return string
      */
-    public function login():string
+    public function login(): string
     {
 
         return "layouts/template/__default_login.html.twig";
+    }
+    /**
+     * Get default main template ( when user are not connected )
+     * @return string
+     */
+    public function main(): string
+    {
+        return "layouts/template/__default.main.html.twig";
     }
 
     /**
      * Get default main template ( when user are not connected )
      * @return string
      */
-    public function main():string
+    public function client(): string
     {
-
-        return "layouts/template/__default.main.html.twig";
+        return "layouts/template/__default.client.html.twig";
     }
 
     /**
@@ -30,9 +37,9 @@ class LayoutsConfig
      * @param int $key
      * @return string
      */
-    public function admin(?int $key = null):string
+    public function admin(?int $key = null): string
     {
-        
+
         $urls =
             [
                 1 => "layouts/template/__default.super.admin.html.twig",
@@ -47,7 +54,7 @@ class LayoutsConfig
      * Get default template ( forms template )
      * @return string
      */
-    public function forms():string
+    public function forms(): string
     {
 
         return "layouts/widgets/__widgets.forms.html.twig";
@@ -57,7 +64,7 @@ class LayoutsConfig
      * Get default template ( charts template )
      * @return string
      */
-    public function charts():string
+    public function charts(): string
     {
 
         return "layouts/widgets/__widgets.charts.html.twig";
@@ -67,7 +74,7 @@ class LayoutsConfig
      * Get default template ( errors template )
      * @return string
      */
-    public function errors():string
+    public function errors(): string
     {
 
         return "layouts/template/__default.errors.html.twig";
@@ -77,7 +84,7 @@ class LayoutsConfig
      * Get default template ( show messages )
      * @return string
      */
-    public function msg():string
+    public function msg(): string
     {
 
         return "layouts/widgets/__widgets.messages.html.twig";
@@ -87,7 +94,7 @@ class LayoutsConfig
      * Get default template ( breadcrumbs template )
      * @return string
      */
-    public function breadcrumbs():string
+    public function breadcrumbs(): string
     {
 
         return "layouts/widgets/__widgets.breadcrumb.html.twig";
@@ -97,7 +104,7 @@ class LayoutsConfig
      * Get default template ( pagination template )
      * @return string
      */
-    public function pagination():string
+    public function pagination(): string
     {
 
         return "layouts/widgets/__widgets.pagination.html.twig";
@@ -107,19 +114,19 @@ class LayoutsConfig
      * Get default template ( ajax template )
      * @return string
      */
-    public function ajax():string
+    public function ajax(): string
     {
 
         return "layouts/widgets/__widgets.ajax.html.twig";
-    }  
-    
+    }
+
     /**
      * Get default template ( tools template )
      * @return string
      */
-    public function tools():string
+    public function tools(): string
     {
 
         return "layouts/widgets/__widgets.tools.html.twig";
-    }     
+    }
 }

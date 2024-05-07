@@ -101,12 +101,10 @@ trait makeUpGearShift
             $table->addColumn('idproduct', 'INTEGER(11)', ['AUTO_INCREMENT', 'PRIMARY KEY']);
             $table->addColumn('libelleProduct', 'VARCHAR(100)');
             $table->addColumn('descriptionProduct', 'VARCHAR(100)');
-            $table->addColumn('quantityProduct', 'VARCHAR(100)');
             $table->addColumn('priceProduct', 'INTEGER(11)');
             $table->addColumn('idCategoryProduct', 'INTEGER(11)');
             $table->addColumn('imageProduct', 'VARCHAR(100)');
             $table->addIndex('idCategoryProduct');
-
             $table->db(3);
         });
     }

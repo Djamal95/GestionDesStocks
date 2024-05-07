@@ -10,6 +10,7 @@ final class entreprise extends MainSwitchers
     private object $insert;
     private object $select;
     private object $delete;
+    private object $update;
     private string $alert = '';
     private string $ans = '';
 
@@ -33,6 +34,7 @@ final class entreprise extends MainSwitchers
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
         $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
+        $this->update = $this->getFunctionObject(static::initQuery(), 'update');
     }
 
     /**
@@ -115,8 +117,11 @@ final class entreprise extends MainSwitchers
      */
     public final function updateEntreprise(string $html): void
     {
+        $identreprise = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
+
         if (static::isValidMethod(true) && static::arrayNoEmpty(['__name__', '__contact__', '__email__'])) {
-            $result = $this->insert->addEntreprise(
+            $result = $this->update->updateEntreprise(
+                $identreprise,
                 static::getPost('__name__'),
                 static::getPost('__contact__'),
                 static::getPost('__email__'),
@@ -130,7 +135,6 @@ final class entreprise extends MainSwitchers
             }
         }
 
-        $identreprise = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
         $entreprise = $this->select->findEntrepriseById($identreprise);
         $this->views($html, [
             'entreprise' => $entreprise,

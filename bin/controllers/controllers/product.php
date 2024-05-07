@@ -45,23 +45,20 @@ final class product extends MainSwitchers
      public final function addProduct(
         string $html
     ): void{
-        if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__quantity__','__price__','__Category__'])){
+        if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__price__','__Category__'])){
             
             $source = static::getFileName('image');
-
-            $this->env->uploadFiles([_DIR_IMG_, 'image']);
 
             $result = $this->insert->addProduct(
                 static::getPost('__name__'),
                 static::getPost('__description__'),
-                static::getPost('__quantity__'),
                 static::getPost('__price__'),
                 static::getPost('__Category__'),
                 $source
             );
             if($result){
                 
-               
+                $this->env->uploadFiles([_DIR_IMG_ => 'image']);
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
             }
@@ -87,24 +84,23 @@ final class product extends MainSwitchers
 
         $idProduct = static::isGet('_product','int')? static::getGet('_product'): 0;
 
-        if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__quantity__','__price__','__Category__'])){
-
+        if(static::isValidMethod(true) && static::arrayNoEmpty(['__name__','__description__','__price__','__Category__'])){
             $source = static::getFileName('image');
             $result = $this->update->updateProduct(
                         static::getPost('__name__'),
                         static::getPost('__description__'),
-                        static::getPost('__quantity__'),
                         static::getPost('__price__'),
                         static::getPost('__Category__'),
                         $source,
                         $idProduct
             );
-
             if($result){
-                
-                $this->env->uploadFiles([_DIR_MEDIA_, 'image']);
+                $this->env->uploadFiles([_DIR_IMG_ => 'image']);
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
+            }else{
+                $this->alert = "alert-danger";
+                $this->ans = $this->msg->answers("error");
             }
 
         }
@@ -116,7 +112,7 @@ final class product extends MainSwitchers
             'product' => $listProduct,
             'listCategory' => $listCategory,
             'alert'=>$this->alert,
-            'answers' => $this->ans
+            'reponse' => $this->ans
         ], true );
     }
     /**
@@ -143,7 +139,7 @@ final class product extends MainSwitchers
 
         $listCategory = $this->select->listOfAllCategory();
         $listOfAllProduct = $this->select->listOfAllProduct();
-
+        
         $this->views( $html, [
             'select' =>$listOfAllProduct,
             'listCategory' => $listCategory,

@@ -10,6 +10,7 @@ final class fournisseur extends MainSwitchers
     private object $insert;
     private object $select;
     private object $delete;
+    private object $update;
     private string $alert = '';
     private string $ans = '';
 
@@ -32,6 +33,7 @@ final class fournisseur extends MainSwitchers
         $this->select = $this->getFunctionObject(static::initQuery(), 'select');
         $this->insert = $this->getFunctionObject(static::initQuery(), 'insert');
         $this->delete = $this->getFunctionObject(static::initQuery(), 'delete');
+        $this->update = $this->getFunctionObject(static::initQuery(), 'update');
     }
 
     /**
@@ -112,21 +114,22 @@ final class fournisseur extends MainSwitchers
     }
 
     /**
-     * start view function
-     * @param string $html
-     * @return void
-     */
-    public final function updateFournisseur(string $html): void
-    {
-
+    * start view function
+    * @param string $html
+    * @return void
+    */
+     public final function updateFournisseur(string $html): void{
+        $idfournisseur = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
         if (static::isValidMethod(true) && static::arrayNoEmpty(['__name__', '__surname__', '__email__', '__contact__', '__entreprise__'])) {
-            $result = $this->insert->addSupplier(
+            $result = $this->update->updateSupplier(
+                $idfournisseur,
                 static::getPost('__name__'),
                 static::getPost('__surname__'),
                 static::getPost('__email__'),
                 static::getPost('__contact__'),
-                static::getPost('__entreprise__'),
+                static::getPost('__entreprise__')
             );
+            
             if ($result) {
                 $this->alert = "alert-success";
                 $this->ans = $this->msg->answers("succes");
@@ -135,7 +138,6 @@ final class fournisseur extends MainSwitchers
                 $this->ans = $this->msg->answers("error");
             }
         }
-        $idfournisseur = static::isGet('_see', 'int') ? static::getGet('_see') : 0;
         $listEntreprise = $this->select->listOfAllEntreprise();
         $supplier = $this->select->findSupplierById($idfournisseur);
         $this->views($html, [

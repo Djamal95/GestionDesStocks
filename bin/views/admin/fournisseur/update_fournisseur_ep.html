@@ -40,7 +40,7 @@ import input_field, select_field, import_field, loader , submit %} {% block cont
             )}}
             {{ input_field(
             {
-            maxlength : 9 ,
+            maxlength : 255 ,
             require : true ,
             character : "numeric",
             name : '__contact__' ,
@@ -52,7 +52,7 @@ import input_field, select_field, import_field, loader , submit %} {% block cont
             {% endfor %}
             {{ select_field({
             label:"Entreprise",
-            name : "_entreprise_",
+            name : "__entreprise__",
             datas : entreprise,
             position : supplier.nameEntreprise,
             value : 'identreprise',
